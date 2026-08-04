@@ -6,20 +6,12 @@
 <title>🍔 Promos Fast Food Chile 💳</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-:root{
- --rojo:#dc2626;--naranja:#f59e0b;--verde:#16a34a;--azul:#2563eb;
- --bg:#f4f5f9;--card:#fff;--texto:#1e2430;--gris:#6b7280;--borde:#e5e7eb;
- --bg-alt:#eff6ff;--chip:#f3f4f6;
-}
-body.dark{
- --bg:#0f172a;--card:#1e293b;--texto:#e2e8f0;--gris:#94a3b8;--borde:#334155;
- --bg-alt:#1e3a5f;--chip:#334155;
-}
+:root{--rojo:#dc2626;--naranja:#f59e0b;--verde:#16a34a;--azul:#2563eb;--bg:#f4f5f9;--card:#fff;--texto:#1e2430;--gris:#6b7280;--borde:#e5e7eb;--bg-alt:#eff6ff;--chip:#f3f4f6}
+body.dark{--bg:#0f172a;--card:#1e293b;--texto:#e2e8f0;--gris:#94a3b8;--borde:#334155;--bg-alt:#1e3a5f;--chip:#334155}
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--texto);transition:background .25s,color .25s}
 header{background:linear-gradient(120deg,#7f1d1d,#dc2626 45%,#f59e0b);color:#fff;padding:26px 20px;text-align:center;position:relative}
-header h1{margin:0;font-size:1.9rem}
-header p{margin:6px 0 0;opacity:.92}
+header h1{margin:0;font-size:1.9rem}header p{margin:6px 0 0;opacity:.92}
 .toggle-dark{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.2);border:none;color:#fff;padding:8px 12px;border-radius:999px;cursor:pointer;font-size:.85rem;font-weight:600}
 .toggle-dark:hover{background:rgba(0,0,0,.35)}
 main{max-width:1100px;margin:0 auto;padding:18px}
@@ -31,44 +23,33 @@ body.dark .aviso{background:#422006;border-color:#92400e;color:#fde68a}
 .num{background:#111827;color:#fff;min-width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem}
 body.dark .num{background:#e2e8f0;color:#0f172a}
 .contador{margin-left:auto;font-size:.8rem;background:var(--chip);border-radius:999px;padding:4px 12px;color:var(--texto)}
-.grid{display:grid;gap:12px}
-.grid-items{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.grid{display:grid;gap:12px}.grid-items{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
 .item{border:2px solid var(--borde);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;background:var(--card);transition:transform .12s,box-shadow .12s;user-select:none;position:relative}
 .item:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.08)}
-.item .emoji{font-size:2rem}
-.item .nombre{font-weight:700;margin-top:4px;font-size:.95rem}
+.item .emoji{font-size:2rem}.item .nombre{font-weight:700;margin-top:4px;font-size:.95rem}
 .item .tipo{color:var(--gris);font-size:.75rem;margin-top:2px}
 .item .marca{display:inline-block;margin-top:8px;font-size:.72rem;border-radius:999px;padding:3px 10px;background:var(--chip);color:var(--texto)}
-.item.sel-rest{border-color:var(--naranja);background:#fffbeb}
-body.dark .item.sel-rest{background:#451a03}
+.item.sel-rest{border-color:var(--naranja);background:#fffbeb}body.dark .item.sel-rest{background:#451a03}
 .item.sel-rest .marca{background:#f59e0b;color:#fff}
-.item.sel-banco{border-color:var(--azul);background:#eff6ff}
-body.dark .item.sel-banco{background:#1e3a5f}
+.item.sel-banco{border-color:var(--azul);background:#eff6ff}body.dark .item.sel-banco{background:#1e3a5f}
 .item.sel-banco .marca{background:var(--azul);color:#fff}
 .borrar-item{position:absolute;top:6px;right:6px;border:none;background:#fee2e2;color:#b91c1c;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:.65rem;line-height:1}
 .borrar-item:hover{background:#fecaca}
 .modos{display:flex;gap:12px;flex-wrap:wrap}
 .modo{flex:1;min-width:230px;border:2px solid var(--borde);border-radius:14px;padding:14px;cursor:pointer;text-align:center;background:var(--card)}
-.modo.sel{border-color:var(--rojo);background:#fef2f2}
-body.dark .modo.sel{background:#450a0a}
-.modo .grande{font-size:1.2rem;font-weight:700}
-.modo .chico{color:var(--gris);font-size:.8rem;margin-top:4px}
+.modo.sel{border-color:var(--rojo);background:#fef2f2}body.dark .modo.sel{background:#450a0a}
+.modo .grande{font-size:1.2rem;font-weight:700}.modo .chico{color:var(--gris);font-size:.8rem;margin-top:4px}
 .res-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .res-botones{display:flex;gap:8px;flex-wrap:wrap}
 .btn{border:none;border-radius:10px;padding:9px 14px;font-weight:600;cursor:pointer;font-size:.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
 .btn:disabled{opacity:.6;cursor:not-allowed}
-.btn-rojo{background:var(--rojo);color:#fff}
-.btn-gris{background:var(--chip);color:var(--texto)}
-.btn-verde{background:var(--verde);color:#fff}
-.btn-violeta{background:#7c3aed;color:#fff}
-.btn-celeste{background:#0891b2;color:#fff}
+.btn-rojo{background:var(--rojo);color:#fff}.btn-gris{background:var(--chip);color:var(--texto)}
+.btn-verde{background:var(--verde);color:#fff}.btn-violeta{background:#7c3aed;color:#fff}.btn-celeste{background:#0891b2;color:#fff}
 .btn-mini{padding:5px 10px;font-size:.75rem;border-radius:8px}
 .grid-promos{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
 .promo{background:var(--card);border:1px solid var(--borde);border-left:5px solid var(--borde);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:7px}
-.promo.verif{border-left-color:var(--verde)}
-.promo.app-promo{border-left-color:var(--naranja)}
-.promo .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.promo .top .rest{font-weight:800}
+.promo.verif{border-left-color:var(--verde)}.promo.app-promo{border-left-color:var(--naranja)}
+.promo .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.promo .top .rest{font-weight:800}
 .banco-chip{background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:3px 10px;font-size:.75rem;font-weight:700}
 body.dark .banco-chip{background:#1e3a5f;color:#93c5fd}
 .promo .titulo{color:var(--rojo);font-size:1.2rem;font-weight:800}
@@ -76,15 +57,12 @@ body.dark .banco-chip{background:#1e3a5f;color:#93c5fd}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{background:var(--chip);border-radius:999px;padding:3px 10px;font-size:.72rem;color:var(--texto)}
 .chip.hoy{background:var(--rojo);color:#fff;font-weight:700}
-.chip.all{background:#111827;color:#fff}
-body.dark .chip.all{background:#e2e8f0;color:#0f172a}
+.chip.all{background:#111827;color:#fff}body.dark .chip.all{background:#e2e8f0;color:#0f172a}
 .meta{font-size:.75rem;color:var(--gris)}
 .promo .acciones{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
 .estado{font-size:.72rem;font-weight:700;border-radius:999px;padding:3px 10px}
-.estado.ref{background:#fef3c7;color:#92400e}
-.estado.ok{background:#dcfce7;color:#166534}
-.estado.ia{background:#ede9fe;color:#5b21b6}
-.estado.man{background:#e0f2fe;color:#075985}
+.estado.ref{background:#fef3c7;color:#92400e}.estado.ok{background:#dcfce7;color:#166534}
+.estado.ia{background:#ede9fe;color:#5b21b6}.estado.man{background:#e0f2fe;color:#075985}
 .estado.app{background:#fed7aa;color:#9a3412}
 .vacio{text-align:center;color:var(--gris);padding:26px 10px;font-size:.95rem}
 footer{text-align:center;color:var(--gris);font-size:.8rem;padding:20px}
@@ -98,45 +76,35 @@ footer{text-align:center;color:var(--gris);font-size:.8rem;padding:20px}
 .dias-check label{display:flex;align-items:center;gap:4px;font-weight:400;background:var(--chip);border-radius:999px;padding:5px 10px;margin:0;font-size:.8rem;cursor:pointer}
 .modal .botones{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
 a.fuente{color:var(--azul);font-size:.8rem;font-weight:700;text-decoration:none}
-a.fuente:hover{text-decoration:underline}
-body.dark a.fuente{color:#60a5fa}
+a.fuente:hover{text-decoration:underline}body.dark a.fuente{color:#60a5fa}
 .link-busqueda{display:inline-block;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:5px 12px;font-size:.8rem;font-weight:600;text-decoration:none}
 body.dark .link-busqueda{background:#1e3a5f;color:#93c5fd}
 .link-busqueda:hover{background:#dbeafe}
-.link-busqueda-todos{background:#111827;color:#fff}
-body.dark .link-busqueda-todos{background:#e2e8f0;color:#0f172a}
+.link-busqueda-todos{background:#111827;color:#fff}body.dark .link-busqueda-todos{background:#e2e8f0;color:#0f172a}
 .link-busqueda-todos:hover{background:#374151}
-.bloque-banco{margin-bottom:14px}
-.bloque-banco .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.bloque-banco{margin-bottom:14px}.bloque-banco .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .config-fila{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .config-fila input{flex:1;min-width:230px;padding:8px;border:1px solid var(--borde);border-radius:8px;font:inherit;background:var(--card);color:var(--texto)}
 .config-fila select{padding:8px;border:1px solid var(--borde);border-radius:8px;font:inherit;background:var(--card);color:var(--texto)}
 #estadoIA{margin-top:10px;font-size:.85rem;max-height:300px;overflow-y:auto}
 #estadoIA div{margin:2px 0}
-/* TOASTS */
+.filtro-vigencia{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;padding:10px;background:var(--bg-alt);border-radius:12px;font-size:.85rem}
+.filtro-vigencia b{color:var(--rojo)}
 #toasts{position:fixed;bottom:20px;right:20px;z-index:100;display:flex;flex-direction:column;gap:10px;max-width:360px}
 .toast{background:var(--card);color:var(--texto);border-left:5px solid var(--azul);border-radius:12px;padding:12px 16px;box-shadow:0 8px 20px rgba(0,0,0,.15);display:flex;gap:10px;align-items:flex-start;animation:slideIn .3s ease-out;font-size:.88rem}
-.toast.ok{border-left-color:var(--verde)}
-.toast.app{border-left-color:var(--naranja)}
-.toast.err{border-left-color:var(--rojo)}
-.toast .emoji{font-size:1.4rem}
-.toast .texto{flex:1}
+.toast.ok{border-left-color:var(--verde)}.toast.app{border-left-color:var(--naranja)}
+.toast.err{border-left-color:var(--rojo)}.toast.warn{border-left-color:var(--naranja)}
+.toast .emoji{font-size:1.4rem}.toast .texto{flex:1}
 .toast .titulo{font-weight:700;margin-bottom:2px}
 .toast .cerrar{background:none;border:none;color:var(--gris);cursor:pointer;font-size:1rem;padding:0}
 @keyframes slideIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
 @keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(400px);opacity:0}}
 .toast.out{animation:slideOut .3s ease-in forwards}
-/* Toggle checkbox */
-.switch{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
-.switch input{opacity:0;width:0;height:0}
-.slider{width:40px;height:22px;background:var(--chip);border-radius:999px;position:relative;transition:.2s}
-.slider:before{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
-.switch input:checked+.slider{background:var(--verde)}
-.switch input:checked+.slider:before{transform:translateX(18px)}
+.info-vigencia{background:#dbeafe;color:#1e40af;border-radius:10px;padding:8px 12px;font-size:.8rem;margin-top:8px}
+body.dark .info-vigencia{background:#1e3a5f;color:#93c5fd}
 </style>
 </head>
 <body>
-
 <header>
   <button class="toggle-dark" id="btnDark">🌙 Oscuro</button>
   <h1>🍔 Promos Fast Food Chile 💳</h1>
@@ -145,13 +113,13 @@ body.dark .link-busqueda-todos{background:#e2e8f0;color:#0f172a}
 </header>
 
 <main>
-  <div class="aviso">✨ <b>Novedades:</b> notificaciones en vivo 🔔, exportar a PDF 📄, modo oscuro 🌙 y <b>cupones exclusivos de apps</b> 📱 (descuentos solo por usar la app del restaurante).</div>
+  <div class="aviso">🆕 <b>Novedad:</b> la IA ahora filtra <b>solo promos del mes en curso</b> (vigencia agosto-octubre 2026). Cualquier promoción más antigua se descarta automáticamente. También puedes subir esta página a <b>GitHub Pages</b> (ver pasos abajo).</div>
 
   <section class="paso">
-    <h2><span class="num">⚙️</span> Conexión con Gemini (opcional)</h2>
+    <h2><span class="num">⚙️</span> Conexión con Gemini</h2>
     <p class="ayuda">API key gratis en <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></p>
     <div class="config-fila">
-      <input type="password" id="apiKeyInput" placeholder="Pega aquí tu API key de Gemini">
+      <input type="password" id="apiKeyInput" placeholder="Pega tu API key de Gemini">
       <select id="modeloSel">
         <option value="gemini-2.0-flash">gemini-2.0-flash</option>
         <option value="gemini-2.0-flash-lite">gemini-2.0-flash-lite</option>
@@ -164,14 +132,14 @@ body.dark .link-busqueda-todos{background:#e2e8f0;color:#0f172a}
   </section>
 
   <section class="paso">
-    <h2><span class="num">1</span> Tus restaurantes favoritos <button class="btn btn-mini btn-gris" id="btnAgregarRest">➕ Agregar</button> <span class="contador" id="cFav">0 seleccionados</span></h2>
-    <p class="ayuda">Toca para marcar/desmarcar ⭐ · usa ✖ para eliminar</p>
+    <h2><span class="num">1</span> Restaurantes favoritos <button class="btn btn-mini btn-gris" id="btnAgregarRest">➕ Agregar</button> <span class="contador" id="cFav">0</span></h2>
+    <p class="ayuda">Toca para marcar · usa ✖ para eliminar</p>
     <div class="grid grid-items" id="restaurantes"></div>
   </section>
 
   <section class="paso">
-    <h2><span class="num">2</span> ¿Dónde eres cliente? <button class="btn btn-mini btn-gris" id="btnAgregarBanco">➕ Agregar</button> <span class="contador" id="cBan">0 seleccionados</span></h2>
-    <p class="ayuda">Toca para marcar/desmarcar 🏦 · usa ✖ para eliminar</p>
+    <h2><span class="num">2</span> ¿Dónde eres cliente? <button class="btn btn-mini btn-gris" id="btnAgregarBanco">➕ Agregar</button> <span class="contador" id="cBan">0</span></h2>
+    <p class="ayuda">Toca para marcar · usa ✖ para eliminar</p>
     <div class="grid grid-items" id="bancos"></div>
   </section>
 
@@ -179,18 +147,22 @@ body.dark .link-busqueda-todos{background:#e2e8f0;color:#0f172a}
     <h2><span class="num">3</span> ¿Qué descuentos quieres ver?</h2>
     <div class="modos">
       <div class="modo" data-modo="hoy" id="modoHoy"><div class="grande">📅 Solo los de HOY</div><div class="chico" id="nombreHoy"></div></div>
-      <div class="modo" data-modo="todos" id="modoTodos"><div class="grande">🗓️ Todos los días de la semana</div><div class="chico">Muestra todas las promociones registradas</div></div>
+      <div class="modo" data-modo="todos" id="modoTodos"><div class="grande">🗓️ Todos los días</div><div class="chico">Muestra todas las promos</div></div>
     </div>
   </section>
 
   <section class="paso">
+    <div class="filtro-vigencia">
+      <b>🔒 Filtro de vigencia:</b>
+      <span id="filtroVigenciaTexto">mostrando solo promos <b>agosto–octubre 2026</b></span>
+    </div>
     <div class="res-head">
-      <h2 style="margin:0"><span class="num">4</span> Promociones bancarias <span class="contador" id="cPromos"></span></h2>
+      <h2 style="margin:0"><span class="num">4</span> Promos bancarias <span class="contador" id="cPromos"></span></h2>
       <div class="res-botones">
         <button class="btn btn-violeta" id="btnIA">🤖 Actualizar con IA</button>
         <button class="btn btn-gris" id="btnCancelarIA" style="display:none">✖ Cancelar</button>
-        <button class="btn btn-gris" id="btnBuscarOnline">🌐 Buscar en línea</button>
-        <button class="btn btn-rojo" id="btnAgregar">➕ Agregar promo</button>
+        <button class="btn btn-gris" id="btnBuscarOnline">🌐 Buscar</button>
+        <button class="btn btn-rojo" id="btnAgregar">➕ Promo</button>
       </div>
     </div>
     <div id="resultados"></div>
@@ -198,141 +170,124 @@ body.dark .link-busqueda-todos{background:#e2e8f0;color:#0f172a}
 
   <section class="paso">
     <div class="res-head">
-      <h2 style="margin:0"><span class="num">5</span> 📱 Cupones exclusivos de apps <span class="contador" id="cApps"></span></h2>
+      <h2 style="margin:0"><span class="num">5</span> 📱 Cupones de apps <span class="contador" id="cApps"></span></h2>
       <div class="res-botones">
         <button class="btn btn-celeste" id="btnIAApp">🤖 Buscar cupones en apps</button>
         <button class="btn btn-gris" id="btnCancelarIAApp" style="display:none">✖ Cancelar</button>
-        <button class="btn btn-gris" id="btnAgregarApp">➕ Agregar cupón de app</button>
-        <button class="btn btn-gris" id="btnExportarPDF">📄 Exportar a PDF</button>
+        <button class="btn btn-gris" id="btnAgregarApp">➕ Cupón app</button>
+        <button class="btn btn-gris" id="btnExportarPDF">📄 Exportar PDF</button>
       </div>
     </div>
-    <p class="ayuda">Promociones disponibles <b>solo usando la app del restaurante</b> (con cualquier medio de pago, tarjeta específica, efectivo, etc.).</p>
+    <p class="ayuda">Cupones disponibles <b>solo en la app del restaurante</b>.</p>
     <div id="resultadosApp"></div>
   </section>
 </main>
 
 <footer>
   Hecho para Ricardo 🇨🇱 · Los datos se guardan en tu navegador ·
-  <button class="btn btn-gris btn-mini" id="btnReset">🔄 Reiniciar app</button>
+  <button class="btn btn-gris btn-mini" id="btnReset">🔄 Reiniciar</button>
 </footer>
 
-<!-- Modal promo bancaria -->
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <h3 id="modalTitulo">➕ Agregar promoción</h3>
-    <form id="formPromo">
-      <label>Restaurante</label><select id="fRest" required></select>
-      <label>Banco / institución</label><select id="fBanco" required></select>
-      <label>Título del descuento *</label>
-      <input type="text" id="fTitulo" placeholder="Ej: 20% pagando con…" required>
-      <label>Detalle / condiciones</label>
-      <textarea id="fDetalle" rows="2"></textarea>
-      <label>Días en que aplica</label>
-      <div class="dias-check">
-        <label><input type="checkbox" id="fAll"> Todos</label>
-        <label><input type="checkbox" class="dia" value="1"> Lun</label>
-        <label><input type="checkbox" class="dia" value="2"> Mar</label>
-        <label><input type="checkbox" class="dia" value="3"> Mié</label>
-        <label><input type="checkbox" class="dia" value="4"> Jue</label>
-        <label><input type="checkbox" class="dia" value="5"> Vie</label>
-        <label><input type="checkbox" class="dia" value="6"> Sáb</label>
-        <label><input type="checkbox" class="dia" value="0"> Dom</label>
-      </div>
-      <label>Tope / requisito</label><input type="text" id="fTope">
-      <label>Vigencia</label><input type="text" id="fVigencia">
-      <label>Fuente oficial (URL)</label><input type="url" id="fFuente">
-      <div class="botones">
-        <button type="button" class="btn btn-gris" id="btnCancelar">Cancelar</button>
-        <button type="submit" class="btn btn-verde">💾 Guardar</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Modal cupón de app -->
-<div class="overlay" id="overlayApp">
-  <div class="modal">
-    <h3 id="modalTituloApp">➕ Agregar cupón de app</h3>
-    <form id="formApp">
-      <label>Restaurante</label><select id="aRest" required></select>
-      <label>Título del cupón *</label>
-      <input type="text" id="aTitulo" placeholder="Ej: 2x1 Big Mac por la app" required>
-      <label>Detalle / cómo canjearlo</label>
-      <textarea id="aDetalle" rows="2" placeholder="Ej: disponible en la app bajo 'Cupones', debe agregarse antes de pagar"></textarea>
-      <label>Medio de pago requerido</label>
-      <select id="aPago">
-        <option value="todos">Cualquier medio de pago</option>
-        <option value="app">Solo dentro de la app (pagar por la app)</option>
-        <option value="tarjetas">Solo tarjetas</option>
-        <option value="efectivo">Solo efectivo</option>
-        <option value="webpay">Solo WebPay</option>
-        <option value="otro">Otro</option>
-      </select>
-      <label>Si es "Otro", especifica</label>
-      <input type="text" id="aPagoOtro" placeholder="Ej: solo MACH">
-      <label>Días en que aplica</label>
-      <div class="dias-check">
-        <label><input type="checkbox" id="aAll"> Todos</label>
-        <label><input type="checkbox" class="dia-app" value="1"> Lun</label>
-        <label><input type="checkbox" class="dia-app" value="2"> Mar</label>
-        <label><input type="checkbox" class="dia-app" value="3"> Mié</label>
-        <label><input type="checkbox" class="dia-app" value="4"> Jue</label>
-        <label><input type="checkbox" class="dia-app" value="5"> Vie</label>
-        <label><input type="checkbox" class="dia-app" value="6"> Sáb</label>
-        <label><input type="checkbox" class="dia-app" value="0"> Dom</label>
-      </div>
-      <label>Vigencia</label><input type="text" id="aVigencia">
-      <label>Fuente (URL opcional)</label><input type="url" id="aFuente">
-      <div class="botones">
-        <button type="button" class="btn btn-gris" id="btnCancelarApp">Cancelar</button>
-        <button type="submit" class="btn btn-verde">💾 Guardar</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Modal búsqueda en línea -->
-<div class="overlay" id="overlayBusqueda">
-  <div class="modal">
-    <h3>🌐 Buscar promociones en línea</h3>
-    <div id="listaBusqueda"></div>
-    <div class="botones"><button class="btn btn-gris" id="btnCerrarBusqueda">Cerrar</button></div>
-  </div>
-</div>
-
-<!-- Modal agregar entidad -->
-<div class="overlay" id="overlayEntidad">
-  <div class="modal">
-    <h3 id="entTitulo">➕ Agregar</h3>
-    <label>Nombre *</label><input type="text" id="entNombre">
-    <label>Emoji</label><input type="text" id="entEmoji" maxlength="4">
-    <label>Tipo / categoría</label><input type="text" id="entTipo">
-    <label id="entUrlLabel">Sitio web</label><input type="url" id="entUrl">
-    <div class="botones">
-      <button class="btn btn-gris" id="entCancelar">Cancelar</button>
-      <button class="btn btn-verde" id="entGuardar">💾 Guardar</button>
+<!-- Modales -->
+<div class="overlay" id="overlay"><div class="modal">
+  <h3 id="modalTitulo">➕ Agregar promoción</h3>
+  <form id="formPromo">
+    <label>Restaurante</label><select id="fRest" required></select>
+    <label>Banco</label><select id="fBanco" required></select>
+    <label>Título *</label><input type="text" id="fTitulo" required>
+    <label>Detalle</label><textarea id="fDetalle" rows="2"></textarea>
+    <label>Días</label>
+    <div class="dias-check">
+      <label><input type="checkbox" id="fAll"> Todos</label>
+      <label><input type="checkbox" class="dia" value="1"> Lun</label>
+      <label><input type="checkbox" class="dia" value="2"> Mar</label>
+      <label><input type="checkbox" class="dia" value="3"> Mié</label>
+      <label><input type="checkbox" class="dia" value="4"> Jue</label>
+      <label><input type="checkbox" class="dia" value="5"> Vie</label>
+      <label><input type="checkbox" class="dia" value="6"> Sáb</label>
+      <label><input type="checkbox" class="dia" value="0"> Dom</label>
     </div>
+    <label>Tope</label><input type="text" id="fTope">
+    <label>Vigencia</label><input type="text" id="fVigencia">
+    <label>Fuente (URL)</label><input type="url" id="fFuente">
+    <div class="botones">
+      <button type="button" class="btn btn-gris" id="btnCancelar">Cancelar</button>
+      <button type="submit" class="btn btn-verde">💾 Guardar</button>
+    </div>
+  </form>
+</div></div>
+
+<div class="overlay" id="overlayApp"><div class="modal">
+  <h3 id="modalTituloApp">➕ Agregar cupón de app</h3>
+  <form id="formApp">
+    <label>Restaurante</label><select id="aRest" required></select>
+    <label>Título *</label><input type="text" id="aTitulo" required>
+    <label>Detalle</label><textarea id="aDetalle" rows="2"></textarea>
+    <label>Medio de pago</label>
+    <select id="aPago">
+      <option value="todos">Cualquier medio</option>
+      <option value="app">Solo pagar por la app</option>
+      <option value="tarjetas">Solo tarjetas</option>
+      <option value="efectivo">Solo efectivo</option>
+      <option value="webpay">Solo WebPay</option>
+      <option value="otro">Otro</option>
+    </select>
+    <label>Si es "Otro", especifica</label><input type="text" id="aPagoOtro">
+    <label>Días</label>
+    <div class="dias-check">
+      <label><input type="checkbox" id="aAll"> Todos</label>
+      <label><input type="checkbox" class="dia-app" value="1"> Lun</label>
+      <label><input type="checkbox" class="dia-app" value="2"> Mar</label>
+      <label><input type="checkbox" class="dia-app" value="3"> Mié</label>
+      <label><input type="checkbox" class="dia-app" value="4"> Jue</label>
+      <label><input type="checkbox" class="dia-app" value="5"> Vie</label>
+      <label><input type="checkbox" class="dia-app" value="6"> Sáb</label>
+      <label><input type="checkbox" class="dia-app" value="0"> Dom</label>
+    </div>
+    <label>Vigencia</label><input type="text" id="aVigencia">
+    <label>Fuente (URL)</label><input type="url" id="aFuente">
+    <div class="botones">
+      <button type="button" class="btn btn-gris" id="btnCancelarApp">Cancelar</button>
+      <button type="submit" class="btn btn-verde">💾 Guardar</button>
+    </div>
+  </form>
+</div></div>
+
+<div class="overlay" id="overlayBusqueda"><div class="modal">
+  <h3>🌐 Buscar promociones</h3><div id="listaBusqueda"></div>
+  <div class="botones"><button class="btn btn-gris" id="btnCerrarBusqueda">Cerrar</button></div>
+</div></div>
+
+<div class="overlay" id="overlayEntidad"><div class="modal">
+  <h3 id="entTitulo">➕ Agregar</h3>
+  <label>Nombre *</label><input type="text" id="entNombre">
+  <label>Emoji</label><input type="text" id="entEmoji" maxlength="4">
+  <label>Tipo</label><input type="text" id="entTipo">
+  <label id="entUrlLabel">Sitio web</label><input type="url" id="entUrl">
+  <div class="botones">
+    <button class="btn btn-gris" id="entCancelar">Cancelar</button>
+    <button class="btn btn-verde" id="entGuardar">💾 Guardar</button>
   </div>
-</div>
+</div></div>
 
 <div id="toasts"></div>
 
 <script>
 const REST_DEFAULT=[
- {id:'mcdonalds',nombre:"McDonald's",tipo:'Hamburguesas · Papas fritas',emoji:'🍔',web:'https://www.mcdonalds.cl'},
+ {id:'mcdonalds',nombre:"McDonald's",tipo:'Hamburguesas',emoji:'🍔',web:'https://www.mcdonalds.cl'},
  {id:'burgerking',nombre:'Burger King',tipo:'Hamburguesas',emoji:'🍔',web:'https://www.burgerking.cl'},
  {id:'kfc',nombre:'KFC',tipo:'Pollo frito',emoji:'🍗',web:'https://www.kfc.cl'},
  {id:'papajohns',nombre:"Papa John's",tipo:'Pizzas',emoji:'🍕',web:'https://www.papajohns.cl'},
  {id:'dominos',nombre:"Domino's Pizza",tipo:'Pizzas',emoji:'🍕',web:'https://www.dominos.cl'},
  {id:'telepizza',nombre:'Telepizza',tipo:'Pizzas',emoji:'🍕',web:'https://www.telepizza.cl'},
- {id:'doggis',nombre:'Doggis',tipo:'Completos · Hamburguesas 🇨🇱',emoji:'🌭',web:'https://www.doggis.cl'},
+ {id:'doggis',nombre:'Doggis',tipo:'Completos 🇨🇱',emoji:'🌭',web:'https://www.doggis.cl'},
  {id:'pedrojuan',nombre:'Pedro, Juan y Diego',tipo:'Hamburguesas 🇨🇱',emoji:'🍔',web:'https://www.pedrojuanydiego.cl'},
  {id:'tarragona',nombre:'Tarragona',tipo:'Pollo frito 🇨🇱',emoji:'🍗',web:'https://www.tarragona.cl'},
  {id:'juanmaestro',nombre:'Juan Maestro',tipo:'Sánguches 🇨🇱',emoji:'🥪',web:'https://www.juanmaestro.cl'},
- {id:'fuentesoda',nombre:'Fuente Soda',tipo:'Clásicos chilenos 🇨🇱',emoji:'🥤',web:'https://www.fuentesoda.cl'},
- {id:'tommybeans',nombre:'Tommy Beans',tipo:'Comida mexicana 🇨🇱',emoji:'🌯',web:'https://www.tommybeans.cl'},
+ {id:'fuentesoda',nombre:'Fuente Soda',tipo:'Clásicos 🇨🇱',emoji:'🥤',web:'https://www.fuentesoda.cl'},
+ {id:'tommybeans',nombre:'Tommy Beans',tipo:'Mexicana 🇨🇱',emoji:'🌯',web:'https://www.tommybeans.cl'},
  {id:'subway',nombre:'Subway',tipo:'Sándwiches',emoji:'🥖',web:'https://www.subway.com/es-CL'},
- {id:'starbucks',nombre:'Starbucks',tipo:'Café · Snacks',emoji:'☕',web:'https://www.starbucks.cl'},
+ {id:'starbucks',nombre:'Starbucks',tipo:'Café',emoji:'☕',web:'https://www.starbucks.cl'},
  {id:'dunkin',nombre:"Dunkin'",tipo:'Donuts · Café',emoji:'🍩',web:'https://www.dunkinchile.cl'},
  {id:'elkiosko',nombre:'El Kiosko',tipo:'Hamburguesas 🇨🇱',emoji:'🍟',web:'https://www.elkiosko.cl'}
 ];
@@ -343,39 +298,98 @@ const BANC_DEFAULT=[
  {id:'bci',nombre:'BCI',tipo:'Banco',emoji:'🏦',url:'https://www.bci.cl'},
  {id:'itau',nombre:'Banco Itaú',tipo:'Banco',emoji:'🏦',url:'https://www.itau.cl'},
  {id:'scotiabank',nombre:'Scotiabank',tipo:'Banco',emoji:'🏦',url:'https://www.scotiabankchile.cl'},
- {id:'falabella',nombre:'Banco Falabella (CMR)',tipo:'Retail financiero',emoji:'💳',url:'https://www.bancofalabella.cl'},
- {id:'ripley',nombre:'Banco Ripley',tipo:'Retail financiero',emoji:'💳',url:'https://www.bancoripley.cl'},
+ {id:'falabella',nombre:'Banco Falabella (CMR)',tipo:'Retail',emoji:'💳',url:'https://www.bancofalabella.cl'},
+ {id:'ripley',nombre:'Banco Ripley',tipo:'Retail',emoji:'💳',url:'https://www.bancoripley.cl'},
  {id:'bice',nombre:'Banco BICE',tipo:'Banco',emoji:'🏦',url:'https://www.bice.cl'},
  {id:'coopeuch',nombre:'Coopeuch',tipo:'Cooperativa',emoji:'🤝',url:'https://www.coopeuch.cl'},
- {id:'cajalosandes',nombre:'Caja Los Andes',tipo:'Caja de compensación',emoji:'🧰',url:'https://www.cajalosandes.cl'},
- {id:'mach',nombre:'MACH (BCI)',tipo:'Billetera digital',emoji:'📱',url:'https://www.mach.com'},
- {id:'tenpo',nombre:'Tenpo',tipo:'Billetera digital',emoji:'📱',url:'https://www.tenpo.com'},
- {id:'superdigital',nombre:'Superdigital (Santander)',tipo:'Cuenta digital',emoji:'📱',url:'https://www.superdigital.cl'}
+ {id:'cajalosandes',nombre:'Caja Los Andes',tipo:'Caja',emoji:'🧰',url:'https://www.cajalosandes.cl'},
+ {id:'mach',nombre:'MACH (BCI)',tipo:'Billetera',emoji:'📱',url:'https://www.mach.com'},
+ {id:'tenpo',nombre:'Tenpo',tipo:'Billetera',emoji:'📱',url:'https://www.tenpo.com'},
+ {id:'superdigital',nombre:'Superdigital',tipo:'Cuenta digital',emoji:'📱',url:'https://www.superdigital.cl'}
 ];
 const PROMOS_SEED=[
- {id:'p1',banco:'mach',restaurante:'mcdonalds',titulo:'20% pagando con MACH',detalle:'Descuento pagando con tarjeta MACH en mostrador, AutoMac y McDelivery.',dias:'all',tope:'Tope $4.000 por compra',vigencia:'Por confirmar',fuente:'https://www.mach.com',verificado:false,tipo:'banco'},
- {id:'p2',banco:'mach',restaurante:'burgerking',titulo:'25% en combos con MACH',detalle:'Aplica pagando con tarjeta MACH en combos seleccionados.',dias:'all',tope:'Tope $5.000',vigencia:'Por confirmar',fuente:'https://www.mach.com',verificado:false,tipo:'banco'},
- {id:'p3',banco:'mach',restaurante:'kfc',titulo:'20% en combos con MACH',detalle:'Aplica pagando con tarjeta MACH en combos individuales.',dias:'all',tope:'Tope $4.000',vigencia:'Por confirmar',fuente:'https://www.mach.com',verificado:false,tipo:'banco'},
- {id:'p4',banco:'tenpo',restaurante:'mcdonalds',titulo:'15% pagando con Tenpo',detalle:'Descuento pagando con tarjeta Tenpo en locales adheridos.',dias:'all',tope:'Tope $3.000',vigencia:'Por confirmar',fuente:'https://www.tenpo.com',verificado:false,tipo:'banco'},
- {id:'p5',banco:'bancochile',restaurante:'burgerking',titulo:'15% con tarjetas Banco de Chile',detalle:'Solo martes pagando con tarjetas Banco de Chile.',dias:[2],tope:'Tope $5.000',vigencia:'Por confirmar',fuente:'https://www.bancochile.cl',verificado:false,tipo:'banco'},
- {id:'p6',banco:'santander',restaurante:'starbucks',titulo:'20% con tarjetas Santander',detalle:'Miércoles de descuento pagando con tarjetas Santander.',dias:[3],tope:'Tope $4.000',vigencia:'Por confirmar',fuente:'https://www.santander.cl',verificado:false,tipo:'banco'},
- {id:'p7',banco:'bci',restaurante:'juanmaestro',titulo:'15% con tarjetas BCI',detalle:'Aplica pagando con tarjetas BCI en locales Juan Maestro.',dias:'all',tope:'Tope $4.000',vigencia:'Por confirmar',fuente:'https://www.bci.cl',verificado:false,tipo:'banco'},
- {id:'p8',banco:'falabella',restaurante:'mcdonalds',titulo:'15% pagando con CMR',detalle:'Pagando con tarjeta CMR (Banco Falabella) en locales y delivery.',dias:'all',tope:'Tope $4.000',vigencia:'Por confirmar',fuente:'https://www.bancofalabella.cl',verificado:false,tipo:'banco'}
+ {id:'p1',banco:'mach',restaurante:'mcdonalds',titulo:'20% pagando con MACH',detalle:'Descuento pagando con tarjeta MACH en mostrador, AutoMac y McDelivery.',dias:'all',tope:'Tope $4.000',vigencia:'Agosto 2026',fuente:'https://www.mach.com',verificado:false,tipo:'banco'},
+ {id:'p2',banco:'mach',restaurante:'burgerking',titulo:'25% en combos con MACH',detalle:'Aplica en combos seleccionados.',dias:'all',tope:'Tope $5.000',vigencia:'Agosto 2026',fuente:'https://www.mach.com',verificado:false,tipo:'banco'},
+ {id:'p3',banco:'tenpo',restaurante:'mcdonalds',titulo:'15% pagando con Tenpo',detalle:'Descuento pagando con Tenpo en locales adheridos.',dias:'all',tope:'Tope $3.000',vigencia:'Agosto 2026',fuente:'https://www.tenpo.com',verificado:false,tipo:'banco'},
+ {id:'p4',banco:'bancochile',restaurante:'burgerking',titulo:'15% con tarjetas Banco de Chile',detalle:'Solo martes.',dias:[2],tope:'Tope $5.000',vigencia:'Agosto 2026',fuente:'https://www.bancochile.cl',verificado:false,tipo:'banco'},
+ {id:'p5',banco:'santander',restaurante:'starbucks',titulo:'20% con tarjetas Santander',detalle:'Miércoles de descuento.',dias:[3],tope:'Tope $4.000',vigencia:'Agosto 2026',fuente:'https://www.santander.cl',verificado:false,tipo:'banco'},
+ {id:'p6',banco:'falabella',restaurante:'mcdonalds',titulo:'15% pagando con CMR',detalle:'En locales y delivery.',dias:'all',tope:'Tope $4.000',vigencia:'Agosto 2026',fuente:'https://www.bancofalabella.cl',verificado:false,tipo:'banco'}
 ];
 const APPS_SEED=[
- {id:'a1',restaurante:'mcdonalds',titulo:'2x1 Big Mac por la app',detalle:'Disponible en la sección "Cupones" de la app McDonald\'s. Canjear antes de pagar.',medioPago:'todos',dias:'all',vigencia:'Renovación semanal',fuente:'https://www.mcdonalds.cl/app',verificado:false,tipo:'app'},
- {id:'a2',restaurante:'burgerking',titulo:'30% en combos por la app',detalle:'Al pagar por la app de Burger King. Válido en locales físicos y delivery.',medioPago:'app',dias:'all',vigencia:'Vigente',fuente:'https://www.burgerking.cl/app',verificado:false,tipo:'app'},
- {id:'a3',restaurante:'kfc',titulo:'Balde familiar con descuento',detalle:'Cupón exclusivo en la app KFC para el balde familiar.',medioPago:'todos',dias:[5,6,0],vigencia:'Vigente',fuente:'https://www.kfc.cl/app',verificado:false,tipo:'app'},
- {id:'a4',restaurante:'papajohns',titulo:'2x1 pizzas familiares',detalle:'En la sección "Ofertas" de la app Papa John\'s.',medioPago:'tarjetas',dias:'all',vigencia:'Vigente',fuente:'https://www.papajohns.cl/app',verificado:false,tipo:'app'},
- {id:'a5',restaurante:'dominos',titulo:'Pizza mediana a $4.990',detalle:'Cupón exclusivo por la app Domino\'s.',medioPago:'app',dias:[1,2,3],vigencia:'Vigente',fuente:'https://www.dominos.cl/app',verificado:false,tipo:'app'}
+ {id:'a1',restaurante:'mcdonalds',titulo:'2x1 Big Mac por la app',detalle:'En sección "Cupones" de la app.',medioPago:'todos',dias:'all',vigencia:'Agosto 2026',fuente:'https://www.mcdonalds.cl/app',verificado:false,tipo:'app'},
+ {id:'a2',restaurante:'burgerking',titulo:'30% en combos por la app',detalle:'Al pagar por la app de Burger King.',medioPago:'app',dias:'all',vigencia:'Agosto 2026',fuente:'https://www.burgerking.cl/app',verificado:false,tipo:'app'},
+ {id:'a3',restaurante:'kfc',titulo:'Balde familiar con descuento',detalle:'Cupón exclusivo en app KFC.',medioPago:'todos',dias:[5,6,0],vigencia:'Agosto 2026',fuente:'https://www.kfc.cl/app',verificado:false,tipo:'app'},
+ {id:'a4',restaurante:'dominos',titulo:'Pizza mediana a $4.990',detalle:'Cupón exclusivo por la app.',medioPago:'app',dias:[1,2,3],vigencia:'Agosto 2026',fuente:'https://www.dominos.cl/app',verificado:false,tipo:'app'}
 ];
 
 const DIAS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const DIAS_CORTO=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 const ORDEN=[1,2,3,4,5,6,0];
 const MAPA_DIAS={'domingo':0,'lunes':1,'martes':2,'miercoles':3,'jueves':4,'viernes':5,'sabado':6,'dom':0,'lun':1,'mar':2,'mie':3,'jue':4,'vie':5,'sab':6};
-const KEY='pffchile_v4';
+const KEY='pffchile_v5';
 const $=s=>document.querySelector(s);
+
+/* ---------- VIGENCIA (filtro de fechas) ---------- */
+/* Definimos meses válidos: actual y próximo (por si alguna promo dice "vigente hasta octubre") */
+function getMesesValidos(){
+ const ahora=new Date();
+ const m=ahora.getMonth();const y=ahora.getFullYear();
+ const meses=[];
+ for(let i=0;i<3;i++){
+  const f=new Date(y,m+i,1);
+  meses.push({mes:f.getMonth(),anio:f.getFullYear()});
+ }
+ return meses;
+}
+const MESES_NOMBRES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function mesTexto(m){return MESES_NOMBRES[m];}
+
+/* Detecta si una promo está claramente desactualizada */
+function esVigenciaAntigua(vigencia,fechaConsulta){
+ if(!vigencia)return false;
+ const v=String(vigencia).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+ const mesesVal=getMesesValidos();
+ // Si menciona un mes anterior al actual o año anterior, es antigua
+ const mesesAnteriores=[
+  ...Array.from({length:mesesVal[0].mes},(_,i)=>MESES_NOMBRES[i]),
+ ];
+ // Detectar años anteriores (2024, 2025 si estamos en 2026)
+ const anioActual=mesesVal[0].anio;
+ for(let a=2010;a<anioActual;a++){
+  if(v.includes(String(a)))return true;
+ }
+ // Detectar meses anteriores al actual (solo si también menciona el año actual o no menciona año)
+ if(mesesAnteriores.length>0){
+  // Buscar si hay un mes anterior mencionado
+  for(const ma of mesesAnteriores){
+   // Normalizar también el nombre del mes
+   const maN=ma.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+   if(v.includes(maN)){
+    // Si el texto también menciona el año actual, está vencida
+    if(v.includes(String(anioActual)))return true;
+    // Si NO menciona año, lo damos por válido (podría ser del año actual)
+    // excepto si la fecha de consulta de la IA dice lo contrario
+    if(fechaConsulta){
+     const fcA=fechaConsulta.getFullYear();
+     const fcM=fechaConsulta.getMonth();
+     const mesesValFc=[];
+     for(let i=0;i<3;i++){
+      const f=new Date(fcA,fcM+i,1);
+      mesesValFc.push({mes:f.getMonth(),anio:f.getFullYear()});
+     }
+     const mesesAntFc=Array.from({length:mesesValFc[0].mes},(_,i)=>MESES_NOMBRES[i]);
+     if(mesesAntFc.includes(ma)&&!v.includes(String(fcA))){
+      // No menciona año y el mes es anterior al mes de consulta: descartamos
+      return true;
+     }
+    }
+   }
+  }
+ }
+ // Palabras clave que indican promo finalizada
+ if(/\b(finalizo|finalizada|caduco|caducada|vencida|expirada|termino|terminada)\b/.test(v))return true;
+ return false;
+}
 
 /* ---------- Estado ---------- */
 let state=null;
@@ -398,16 +412,17 @@ function rebuildMapas(){
 }
 function guardar(){localStorage.setItem(KEY,JSON.stringify(state));}
 
-/* ---------- Utilidades ---------- */
 function normalizarNombre(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();}
-function urlBusqueda(bancoId,restId){
- const b=BAN_MAP[bancoId]?BAN_MAP[bancoId].nombre:bancoId;
- const r=REST_MAP[restId]?REST_MAP[restId].nombre:restId;
- return 'https://www.google.com/search?q='+encodeURIComponent(`descuento ${b} ${r} chile ${new Date().getFullYear()}`);
+function urlBusqueda(bid,rid){
+ const b=BAN_MAP[bid]?BAN_MAP[bid].nombre:bid;
+ const r=REST_MAP[rid]?REST_MAP[rid].nombre:rid;
+ const mv=getMesesValidos()[0];
+ return 'https://www.google.com/search?q='+encodeURIComponent(`descuento ${b} ${r} chile ${mesTexto(mv.mes)} ${mv.anio}`);
 }
-function urlBusquedaApp(restId){
- const r=REST_MAP[restId]?REST_MAP[restId].nombre:restId;
- return 'https://www.google.com/search?q='+encodeURIComponent(`cupones app ${r} chile ${new Date().getFullYear()}`);
+function urlBusquedaApp(rid){
+ const r=REST_MAP[rid]?REST_MAP[rid].nombre:rid;
+ const mv=getMesesValidos()[0];
+ return 'https://www.google.com/search?q='+encodeURIComponent(`cupones app ${r} chile ${mesTexto(mv.mes)} ${mv.anio}`);
 }
 function normalizarDias(d){
  if(d==='all'||d==='todos'||d==='diario'||(Array.isArray(d)&&d.length>=7))return 'all';
@@ -427,34 +442,32 @@ function normalizarDias(d){
  return 'all';
 }
 
-/* ---------- TOASTS (notificaciones) ---------- */
+/* ---------- TOASTS ---------- */
 function notificar(titulo,descripcion,tipo='info',dur=5000){
  const cont=$('#toasts');
- const emojiMap={ok:'✅',app:'📱',err:'❌',info:'🔔',ia:'🤖'};
+ const emojiMap={ok:'✅',app:'📱',err:'❌',info:'🔔',ia:'🤖',warn:'⚠️'};
  const div=document.createElement('div');
  div.className='toast '+tipo;
  div.innerHTML=`<span class="emoji">${emojiMap[tipo]||'🔔'}</span>
    <div class="texto"><div class="titulo">${titulo}</div>${descripcion?`<div>${descripcion}</div>`:''}</div>
    <button class="cerrar" onclick="this.parentElement.classList.add('out');setTimeout(()=>this.parentElement.remove(),300)">✖</button>`;
  cont.appendChild(div);
- setTimeout(()=>{
-  if(div.parentElement){div.classList.add('out');setTimeout(()=>div.remove(),300);}
- },dur);
+ setTimeout(()=>{if(div.parentElement){div.classList.add('out');setTimeout(()=>div.remove(),300);}},dur);
 }
 
 /* ---------- Render ---------- */
 function renderRestaurantes(){
- $('#cFav').textContent=state.favoritos.length+' seleccionados';
+ $('#cFav').textContent=state.favoritos.length;
  $('#restaurantes').innerHTML=state.listaRestaurantes.map(r=>{
   const sel=state.favoritos.includes(r.id);
-  return `<div class="item ${sel?'sel-rest':''}" data-id="${r.id}"><button class="borrar-item" data-del="${r.id}" title="Eliminar">✖</button><div class="emoji">${r.emoji}</div><div class="nombre">${r.nombre}</div><div class="tipo">${r.tipo}</div><span class="marca">${sel?'★ Favorito':'☆ Elegir'}</span></div>`;
+  return `<div class="item ${sel?'sel-rest':''}" data-id="${r.id}"><button class="borrar-item" data-del="${r.id}">✖</button><div class="emoji">${r.emoji}</div><div class="nombre">${r.nombre}</div><div class="tipo">${r.tipo}</div><span class="marca">${sel?'★ Favorito':'☆ Elegir'}</span></div>`;
  }).join('')||'<div class="vacio">No hay restaurantes.</div>';
 }
 function renderBancos(){
- $('#cBan').textContent=state.bancos.length+' seleccionados';
+ $('#cBan').textContent=state.bancos.length;
  $('#bancos').innerHTML=state.listaBancos.map(b=>{
   const sel=state.bancos.includes(b.id);
-  return `<div class="item ${sel?'sel-banco':''}" data-id="${b.id}"><button class="borrar-item" data-del="${b.id}" title="Eliminar">✖</button><div class="emoji">${b.emoji}</div><div class="nombre">${b.nombre}</div><div class="tipo">${b.tipo}</div><span class="marca">${sel?'✓ Cliente':'Elegir'}</span></div>`;
+  return `<div class="item ${sel?'sel-banco':''}" data-id="${b.id}"><button class="borrar-item" data-del="${b.id}">✖</button><div class="emoji">${b.emoji}</div><div class="nombre">${b.nombre}</div><div class="tipo">${b.tipo}</div><span class="marca">${sel?'✓ Cliente':'Elegir'}</span></div>`;
  }).join('')||'<div class="vacio">No hay bancos.</div>';
 }
 function renderModos(){
@@ -473,7 +486,7 @@ function badgeEstado(p){
  return '<span class="estado ref">⚠️ Referencial</span>';
 }
 function pagoTexto(m){
- const map={'todos':'Cualquier medio de pago','app':'Solo pagar por la app','tarjetas':'Solo tarjetas','efectivo':'Solo efectivo','webpay':'Solo WebPay'};
+ const map={'todos':'Cualquier medio','app':'Pagar por la app','tarjetas':'Tarjetas','efectivo':'Efectivo','webpay':'WebPay'};
  return map[m]||('Otro: '+(m||''));
 }
 function promoCardBanco(p,hoy){
@@ -486,10 +499,10 @@ function promoCardBanco(p,hoy){
   <div class="chips">${diasTexto(p,hoy)}</div>
   ${p.tope?`<div class="meta">📌 ${p.tope}</div>`:''}
   ${p.vigencia?`<div class="meta">🕓 Vigencia: ${p.vigencia}</div>`:''}
-  ${p.fuente?`<a class="fuente" href="${p.fuente}" target="_blank" rel="noopener">🔗 Ver fuente ↗</a>`:''}
+  ${p.fuente?`<a class="fuente" href="${p.fuente}" target="_blank" rel="noopener">🔗 Fuente ↗</a>`:''}
   <div class="acciones">
-   <a class="btn btn-mini btn-gris" href="${urlBusqueda(p.banco,p.restaurante)}" target="_blank" rel="noopener">🔍 Buscar</a>
-   <button class="btn btn-mini ${p.verificado?'btn-gris':'btn-verde'}" data-acc="verif" data-id="${p.id}" data-grupo="promos">${p.verificado?'↩ Quitar verif.':'✔ Verificar'}</button>
+   <a class="btn btn-mini btn-gris" href="${urlBusqueda(p.banco,p.restaurante)}" target="_blank" rel="noopener">🔍</a>
+   <button class="btn btn-mini ${p.verificado?'btn-gris':'btn-verde'}" data-acc="verif" data-id="${p.id}" data-grupo="promos">${p.verificado?'↩':'✔ Verif.'}</button>
    <button class="btn btn-mini btn-gris" data-acc="editar" data-id="${p.id}" data-grupo="promos">✏️</button>
    <button class="btn btn-mini btn-gris" data-acc="eliminar" data-id="${p.id}" data-grupo="promos">🗑️</button>
   </div></div>`;
@@ -497,26 +510,31 @@ function promoCardBanco(p,hoy){
 function promoCardApp(p,hoy){
  const r=REST_MAP[p.restaurante]||{nombre:p.restaurante,emoji:'🍽️'};
  return `<div class="promo app-promo ${p.verificado?'verif':''}">
-  <div class="top"><span style="font-size:1.4rem">${r.emoji}</span><span class="rest">${r.nombre}</span><span class="banco-chip">📱 Cupón app</span>${badgeEstado(p)}</div>
+  <div class="top"><span style="font-size:1.4rem">${r.emoji}</span><span class="rest">${r.nombre}</span><span class="banco-chip">📱 App</span>${badgeEstado(p)}</div>
   <div class="titulo">${p.titulo}</div>
   ${p.detalle?`<div class="detalle">${p.detalle}</div>`:''}
   <div class="chips">${diasTexto(p,hoy)} <span class="chip">💳 ${pagoTexto(p.medioPago)}</span></div>
-  ${p.vigencia?`<div class="meta">🕓 Vigencia: ${p.vigencia}</div>`:''}
-  ${p.fuente?`<a class="fuente" href="${p.fuente}" target="_blank" rel="noopener">🔗 Ver fuente ↗</a>`:''}
+  ${p.vigencia?`<div class="meta">🕓 ${p.vigencia}</div>`:''}
+  ${p.fuente?`<a class="fuente" href="${p.fuente}" target="_blank" rel="noopener">🔗 Fuente ↗</a>`:''}
   <div class="acciones">
-   <a class="btn btn-mini btn-gris" href="${urlBusquedaApp(p.restaurante)}" target="_blank" rel="noopener">🔍 Buscar</a>
-   <button class="btn btn-mini ${p.verificado?'btn-gris':'btn-verde'}" data-acc="verif" data-id="${p.id}" data-grupo="apps">${p.verificado?'↩ Quitar verif.':'✔ Verificar'}</button>
+   <a class="btn btn-mini btn-gris" href="${urlBusquedaApp(p.restaurante)}" target="_blank" rel="noopener">🔍</a>
+   <button class="btn btn-mini ${p.verificado?'btn-gris':'btn-verde'}" data-acc="verif" data-id="${p.id}" data-grupo="apps">${p.verificado?'↩':'✔ Verif.'}</button>
    <button class="btn btn-mini btn-gris" data-acc="editar" data-id="${p.id}" data-grupo="apps">✏️</button>
    <button class="btn btn-mini btn-gris" data-acc="eliminar" data-id="${p.id}" data-grupo="apps">🗑️</button>
   </div></div>`;
 }
 function renderResultados(){
  const cont=$('#resultados');const contApp=$('#resultadosApp');const hoy=new Date().getDay();
+ // Actualizar texto de filtro de vigencia
+ const mv=getMesesValidos();
+ const txtFiltro=mv.map(m=>mesTexto(m.mes)+' '+m.anio).join(' – ');
+ $('#filtroVigenciaTexto').innerHTML='mostrando solo promos <b>'+txtFiltro+'</b>';
+ 
  if(state.favoritos.length===0){
-  cont.innerHTML='<div class="vacio">👆 Marca primero tus <b>restaurantes favoritos</b>.</div>';
+  cont.innerHTML='<div class="vacio">👆 Marca tus <b>restaurantes favoritos</b> primero.</div>';
   $('#cPromos').textContent='';
  }else if(state.bancos.length===0){
-  cont.innerHTML='<div class="vacio">👆 Marca tus <b>bancos</b> para ver promos bancarias.</div>';
+  cont.innerHTML='<div class="vacio">👆 Marca tus <b>bancos</b> para ver promos.</div>';
   $('#cPromos').textContent='';
  }else{
   let lista=state.promos.filter(p=>{
@@ -525,30 +543,24 @@ function renderResultados(){
    if(state.modo==='hoy'&&p.dias!=='all'&&!(Array.isArray(p.dias)&&p.dias.includes(hoy)))return false;
    return true;
   });
-  lista.sort((a,b)=>(b.verificado-a.verificado)||((REST_MAP[a.restaurante]?.nombre||'').localeCompare(REST_MAP[b.restaurante]?.nombre||'')));
-  $('#cPromos').textContent=lista.length+' encontrada'+(lista.length===1?'':'s');
-  if(lista.length===0)cont.innerHTML='<div class="vacio">😕 Sin promos bancarias para esta combinación. Usa 🤖 o ➕.</div>';
+  lista.sort((a,b)=>(b.verificado-a.verificado));
+  $('#cPromos').textContent=lista.length;
+  if(lista.length===0)cont.innerHTML='<div class="vacio">😕 Sin promos bancarias. Usa 🤖 o ➕.</div>';
   else cont.innerHTML=`<div class="grid-promos">${lista.map(p=>promoCardBanco(p,hoy)).join('')}</div>`;
  }
- // Apps
  let listaApp=state.apps.filter(a=>{
   if(!state.favoritos.includes(a.restaurante))return false;
   if(state.modo==='hoy'&&a.dias!=='all'&&!(Array.isArray(a.dias)&&a.dias.includes(hoy)))return false;
   return true;
  });
- listaApp.sort((a,b)=>(b.verificado-a.verificado)||((REST_MAP[a.restaurante]?.nombre||'').localeCompare(REST_MAP[b.restaurante]?.nombre||'')));
- $('#cApps').textContent=listaApp.length+' encontrada'+(listaApp.length===1?'':'s');
- if(state.favoritos.length===0){
-  contApp.innerHTML='<div class="vacio">👆 Marca tus <b>restaurantes favoritos</b>.</div>';
- }else if(listaApp.length===0){
-  contApp.innerHTML='<div class="vacio">😕 Sin cupones de app. Usa 🤖 <b>Buscar cupones en apps</b>.</div>';
- }else{
-  contApp.innerHTML=`<div class="grid-promos">${listaApp.map(a=>promoCardApp(a,hoy)).join('')}</div>`;
- }
+ listaApp.sort((a,b)=>(b.verificado-a.verificado));
+ $('#cApps').textContent=listaApp.length;
+ if(state.favoritos.length===0)contApp.innerHTML='<div class="vacio">👆 Marca tus favoritos.</div>';
+ else if(listaApp.length===0)contApp.innerHTML='<div class="vacio">😕 Sin cupones. Usa 🤖 o ➕.</div>';
+ else contApp.innerHTML=`<div class="grid-promos">${listaApp.map(a=>promoCardApp(a,hoy)).join('')}</div>`;
 }
 function renderTodo(){renderRestaurantes();renderBancos();renderModos();renderResultados();}
 
-/* ---------- Eventos de selección ---------- */
 $('#restaurantes').addEventListener('click',e=>{
  const del=e.target.closest('.borrar-item');
  if(del){eliminarEntidad('rest',del.dataset.del);return;}
@@ -568,59 +580,44 @@ $('#bancos').addEventListener('click',e=>{
 document.querySelectorAll('.modo').forEach(m=>m.addEventListener('click',()=>{
  state.modo=m.dataset.modo;guardar();renderModos();renderResultados();
 }));
-
-/* Click handlers para acciones en promos */
 document.body.addEventListener('click',e=>{
  const btn=e.target.closest('button[data-acc]');if(!btn)return;
  const grupo=btn.dataset.grupo;
  const arr=grupo==='apps'?state.apps:state.promos;
  const p=arr.find(x=>x.id===btn.dataset.id);if(!p)return;
  if(btn.dataset.acc==='verif'){p.verificado=!p.verificado;guardar();renderResultados();}
- if(btn.dataset.acc==='eliminar'){if(confirm('¿Eliminar esta promoción?')){
-  const idx=arr.indexOf(p);if(idx>=0)arr.splice(idx,1);
-  guardar();renderResultados();
- }}
- if(btn.dataset.acc==='editar'){
-  if(grupo==='apps')abrirModalApp(p);else abrirModal(p);
- }
+ if(btn.dataset.acc==='eliminar'){if(confirm('¿Eliminar?')){const idx=arr.indexOf(p);if(idx>=0)arr.splice(idx,1);guardar();renderResultados();}}
+ if(btn.dataset.acc==='editar'){if(grupo==='apps')abrirModalApp(p);else abrirModal(p);}
 });
 
-/* ---------- CRUD entidades ---------- */
 let entidadTipo=null;
 function abrirEntidad(tipo){
  entidadTipo=tipo;
- $('#entTitulo').textContent=tipo==='rest'?'➕ Agregar restaurante':'➕ Agregar banco';
+ $('#entTitulo').textContent=tipo==='rest'?'➕ Restaurante':'➕ Banco';
  $('#entNombre').value='';$('#entTipo').value=tipo==='rest'?'':'Banco';
- $('#entEmoji').value=tipo==='rest'?'🍽️':'🏦';
- $('#entUrl').value='';
- $('#entUrlLabel').textContent=tipo==='rest'?'Sitio web':'URL de beneficios';
- $('#overlayEntidad').classList.add('abierto');
- setTimeout(()=>$('#entNombre').focus(),50);
+ $('#entEmoji').value=tipo==='rest'?'🍽️':'🏦';$('#entUrl').value='';
+ $('#entUrlLabel').textContent=tipo==='rest'?'Sitio web':'URL beneficios';
+ $('#overlayEntidad').classList.add('abierto');setTimeout(()=>$('#entNombre').focus(),50);
 }
 $('#btnAgregarRest').addEventListener('click',()=>abrirEntidad('rest'));
 $('#btnAgregarBanco').addEventListener('click',()=>abrirEntidad('banco'));
 $('#entCancelar').addEventListener('click',()=>$('#overlayEntidad').classList.remove('abierto'));
 $('#overlayEntidad').addEventListener('click',e=>{if(e.target.id==='overlayEntidad')e.target.classList.remove('abierto');});
 $('#entGuardar').addEventListener('click',()=>{
- const nombre=$('#entNombre').value.trim();
- if(!nombre){alert('El nombre es obligatorio.');return;}
+ const nombre=$('#entNombre').value.trim();if(!nombre){alert('Nombre obligatorio.');return;}
  const id='c'+Date.now();
  const emoji=$('#entEmoji').value.trim()||(entidadTipo==='rest'?'🍽️':'🏦');
- const tipoTxt=$('#entTipo').value.trim()||(entidadTipo==='rest'?'Comida':'Institución financiera');
+ const tipoTxt=$('#entTipo').value.trim()||(entidadTipo==='rest'?'Comida':'Financiera');
  const url=$('#entUrl').value.trim();
- if(entidadTipo==='rest'){
-  state.listaRestaurantes.push({id,nombre,emoji,tipo:tipoTxt,web:url});
- }else{
-  state.listaBancos.push({id,nombre,emoji,tipo:tipoTxt,url:url||('https://www.google.com/search?q='+encodeURIComponent(nombre+' beneficios chile'))});
- }
- guardar();rebuildMapas();renderTodo();
- $('#overlayEntidad').classList.remove('abierto');
+ if(entidadTipo==='rest')state.listaRestaurantes.push({id,nombre,emoji,tipo:tipoTxt,web:url});
+ else state.listaBancos.push({id,nombre,emoji,tipo:tipoTxt,url:url||('https://www.google.com/search?q='+encodeURIComponent(nombre+' beneficios chile'))});
+ guardar();rebuildMapas();renderTodo();$('#overlayEntidad').classList.remove('abierto');
 });
 function eliminarEntidad(tipo,id){
  if(tipo==='rest'){
   const r=REST_MAP[id];if(!r)return;
-  const n=state.promos.filter(p=>p.restaurante===id).length + state.apps.filter(a=>a.restaurante===id).length;
-  if(!confirm(`¿Eliminar "${r.nombre}"?`+(n?`\nSe borrarán también ${n} promo(s) asociada(s).`:'')))return;
+  const n=state.promos.filter(p=>p.restaurante===id).length+state.apps.filter(a=>a.restaurante===id).length;
+  if(!confirm(`¿Eliminar "${r.nombre}"?`+(n?`\nSe borrarán ${n} promo(s).`:'')))return;
   state.listaRestaurantes=state.listaRestaurantes.filter(x=>x.id!==id);
   state.favoritos=state.favoritos.filter(x=>x!==id);
   state.promos=state.promos.filter(p=>p.restaurante!==id);
@@ -628,7 +625,7 @@ function eliminarEntidad(tipo,id){
  }else{
   const b=BAN_MAP[id];if(!b)return;
   const n=state.promos.filter(p=>p.banco===id).length;
-  if(!confirm(`¿Eliminar "${b.nombre}"?`+(n?`\nSe borrarán también ${n} promo(s).`:'')))return;
+  if(!confirm(`¿Eliminar "${b.nombre}"?`+(n?`\nSe borrarán ${n} promo(s).`:'')))return;
   state.listaBancos=state.listaBancos.filter(x=>x.id!==id);
   state.bancos=state.bancos.filter(x=>x!==id);
   state.promos=state.promos.filter(p=>p.banco!==id);
@@ -636,7 +633,7 @@ function eliminarEntidad(tipo,id){
  guardar();rebuildMapas();renderTodo();
 }
 
-/* ---------- IA Gemini ---------- */
+/* ---------- IA ---------- */
 function logIA(msg,tipo){
  const color=tipo==='err'?'#b91c1c':tipo==='ok'?'#166534':'#374151';
  $('#estadoIA').innerHTML+=`<div style="color:${color}">${msg}</div>`;
@@ -653,7 +650,7 @@ async function llamarGemini(key,modelo,prompt,conBusqueda,intentos=0){
   try{const j=await res.json();msg=j.error?.message||msg;}catch(e){}
   if((msg.includes('exceeded')||msg.includes('quota')||res.status===429)&&intentos<3){
    const espera=Math.pow(2,intentos)*15000+Math.random()*5000;
-   logIA(`⏳ Cuota excedida. Reintentando en ${Math.ceil(espera/1000)}s…`);
+   logIA(`⏳ Reintentando en ${Math.ceil(espera/1000)}s…`);
    await delay(espera);
    return llamarGemini(key,modelo,prompt,conBusqueda,intentos+1);
   }
@@ -683,24 +680,39 @@ function matchRestaurante(nombre,favs){
 
 async function consultarBancoIA(b,favs,apiKey,modelo,signal){
  const lista=favs.map(r=>r.nombre).join(', ');
- const hoyStr=new Date().toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
- const prompt=`Eres un investigador de promociones bancarias en Chile. Hoy es ${hoyStr}.
-Busca en internet promociones VIGENTES de "${b.nombre}" (${b.tipo}) para pagar en: ${lista}.
-Reglas estrictas:
-1. Solo incluye promos que realmente encontraste. No inventes.
-2. "dias": 0=Dom,1=Lun,2=Mar,3=Mié,4=Jue,5=Vie,6=Sáb. "all" si es todos los días.
-3. "fuente": URL exacta de la promo.
-Responde SOLO JSON: {"promos":[{"restaurante":"<nombre>","titulo":"<descuento>","detalle":"<condiciones>","dias":"all","tope":"<tope>","vigencia":"<hasta>","fuente":"<url>"}]}
-Si no hay promos, responde {"promos":[]}.`;
+ const mv=getMesesValidos();
+ const fechaStr=new Date().toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ const rangoFechas=mv.map(m=>mesTexto(m.mes)+' '+m.anio).join(', ');
+ const mesActual=mesTexto(mv[0].mes);
+ const anioActual=mv[0].anio;
+ const prompt=`Eres un investigador de promociones bancarias EN CHILE.
+HOY es: ${fechaStr}.
+MESES VÁLIDOS (solo promos vigentes aquí): ${rangoFechas}.
+Mes ACTUAL: ${mesActual} de ${anioActual}.
+TAREA: buscar SOLO promociones VIGENTES publicadas en ${mesActual} de ${anioActual} (o meses siguientes indicados) del banco "${b.nombre}" (${b.tipo}, Chile) para pagar en: ${lista}.
+REGLAS ESTRICTAS DE FECHA:
+1. RECHAZA cualquier promoción cuya vigencia sea anterior a ${mesActual} ${anioActual} (julio, junio, mayo, 2025, 2024, etc. están VENCIDAS).
+2. RECHAZA promos con vigencia "hasta [mes anterior]" o que digan "finalizó", "vencida", "caducada".
+3. Si una promo NO menciona vigencia clara, NO la incluyas (prefiere calidad sobre cantidad).
+4. Solo incluye promos que REALMENTE encontraste vigentes. NO INVENTES.
+5. Si no encuentras NADA vigente, responde {"promos":[]}.
+FORMATO JSON (responde SOLO esto):
+{"promos":[{"restaurante":"<nombre exacto>","titulo":"<ej: 20% descuento>","detalle":"<condiciones>","dias":"all","tope":"<tope>","vigencia":"<ej: agosto 2026>","fuente":"<URL EXACTA donde está publicada>"}]}
+Usa "dias": 0=Dom,1=Lun,2=Mar,3=Mié,4=Jue,5=Vie,6=Sáb. "all" si es todos los días.`;
  let texto;
  try{texto=await llamarGemini(apiKey,modelo,prompt,true);}
  catch(e){if(signal?.aborted)throw new Error('Cancelado');texto=await llamarGemini(apiKey,modelo,prompt,false);}
  let json;
  try{json=extraerJSON(texto);}catch(e){throw new Error('JSON inválido');}
  const arr=Array.isArray(json)?json:(json.promos||json.resultados||[]);
- const nuevas=[];
+ const nuevas=[];let descartadas=0;
+ const fechaConsulta=new Date();
  for(const it of arr){
   if(!it||typeof it!=='object')continue;
+  // Filtro de vigencia
+  if(esVigenciaAntigua(it.vigencia,fechaConsulta)){
+   descartadas++;continue;
+  }
   const r=matchRestaurante(it.restaurante||'',favs);
   if(!r)continue;
   nuevas.push({
@@ -710,7 +722,7 @@ Si no hay promos, responde {"promos":[]}.`;
    detalle:String(it.detalle||'').slice(0,300),
    dias:normalizarDias(it.dias),
    tope:String(it.tope||'').slice(0,120),
-   vigencia:String(it.vigencia||'Confirmar').slice(0,80),
+   vigencia:String(it.vigencia||mesTexto(mv[0].mes)+' '+mv[0].anio).slice(0,80),
    fuente:String(it.fuente||'').slice(0,300)||b.url,
    verificado:false,origen:'ia',fecha:new Date().toLocaleDateString('es-CL')
   });
@@ -718,42 +730,43 @@ Si no hay promos, responde {"promos":[]}.`;
  const idsR=new Set(nuevas.map(p=>p.restaurante));
  state.promos=state.promos.filter(p=>!(p.banco===b.id&&idsR.has(p.restaurante)&&p.origen!=='manual'));
  state.promos.push(...nuevas);
- return nuevas;
+ return {nuevas,descartadas};
 }
 
 let actualizando=false,signalIA=null;
 async function actualizarConIA(){
  if(actualizando)return;
  const apiKey=(state.apiKey||$('#apiKeyInput').value||'').trim();
- if(!apiKey){logIA('⚠️ Pega y guarda tu API key primero.','err');notificar('Sin API key','Configúrala arriba antes de usar IA.','err');return;}
- if(state.favoritos.length===0||state.bancos.length===0){logIA('⚠️ Marca favoritos y bancos.','err');notificar('Faltan selecciones','Marca favoritos y bancos primero.','err');return;}
+ if(!apiKey){logIA('⚠️ Pega tu API key.','err');notificar('Sin API key','Configúrala arriba.','err');return;}
+ if(state.favoritos.length===0||state.bancos.length===0){logIA('⚠️ Marca favoritos y bancos.','err');notificar('Faltan selecciones','Marca favoritos y bancos.','err');return;}
  actualizando=true;signalIA={aborted:false};
  const btn=$('#btnIA'),btnC=$('#btnCancelarIA');
  btn.disabled=true;btnC.style.display='inline-flex';btnC.disabled=false;
  $('#estadoIA').innerHTML='';
  const favs=state.favoritos.map(id=>REST_MAP[id]).filter(Boolean);
  const bancosSel=state.bancos.map(id=>BAN_MAP[id]).filter(Boolean).slice(0,10);
- let total=0;let bancosConPromo=0;
- logIA(`🤖 Iniciando con ${state.modelo||'gemini-2.0-flash'}…`);
- notificar('🤖 Actualización iniciada',`Consultando ${bancosSel.length} banco(s)…`,'ia');
+ let total=0;let totalDescartadas=0;
+ logIA(`🤖 Buscando SOLO promos vigentes (${mesTexto(getMesesValidos()[0].mes)} ${getMesesValidos()[0].anio})…`);
+ notificar('🤖 Actualización iniciada',`Filtrando solo promos del mes en curso.`,'ia');
  for(let i=0;i<bancosSel.length;i++){
   if(signalIA.aborted){logIA('⛔ Cancelado.','');break;}
   const b=bancosSel[i];
   logIA(`🔎 [${i+1}/${bancosSel.length}] ${b.emoji} ${b.nombre}…`);
   try{
-   const nuevas=await consultarBancoIA(b,favs,apiKey,state.modelo||'gemini-2.0-flash',signalIA);
-   logIA(`✅ ${b.nombre}: ${nuevas.length} promo(s).`,nuevas.length?'ok':'');
+   const {nuevas,descartadas}=await consultarBancoIA(b,favs,apiKey,state.modelo||'gemini-2.0-flash',signalIA);
+   logIA(`✅ ${b.nombre}: ${nuevas.length} promo(s)${descartadas?' · 🗑️ '+descartadas+' antigua(s) descartada(s)':''}.`,nuevas.length?'ok':'');
+   total+=nuevas.length;totalDescartadas+=descartadas;
    if(nuevas.length>0){
-    total+=nuevas.length;bancosConPromo++;
     notificar(`🎉 ${b.nombre} · ${nuevas.length} promo(s)`,
      nuevas.slice(0,3).map(p=>`• ${REST_MAP[p.restaurante]?.nombre}: ${p.titulo}`).join('<br>'),'ok',6000);
    }
   }catch(err){logIA(`❌ ${b.nombre}: ${err.message}`,'err');}
   guardar();renderResultados();
-  if(i<bancosSel.length-1&&!signalIA.aborted){logIA('⏳ Esperando 15s…');await delay(15000);}
+  if(i<bancosSel.length-1&&!signalIA.aborted){logIA('⏳ 15s para cuota…');await delay(15000);}
  }
- logIA(`🏁 Total: ${total} promos nuevas en ${bancosConPromo} banco(s).`,'ok');
- if(total>0)notificar('✅ Actualización completa',`${total} promo(s) bancaria(s) agregadas.`,'ok',6000);
+ logIA(`🏁 ${total} nuevas · ${totalDescartadas} antiguas descartadas.`,'ok');
+ if(total>0)notificar('✅ Completo',`${total} promos nuevas, ${totalDescartadas} antiguas descartadas.`,'ok',6000);
+ if(totalDescartadas>0&&total===0)notificar('⚠️ Solo promos antiguas',`La IA encontró ${totalDescartadas} promociones vencidas. No hay vigentes registradas aún.`,'warn',7000);
  actualizando=false;btn.disabled=false;btnC.style.display='none';
 }
 $('#btnIA').addEventListener('click',actualizarConIA);
@@ -762,28 +775,34 @@ $('#btnCancelarIA').addEventListener('click',()=>{
  logIA('⛔ Cancelando…','');$('#btnCancelarIA').disabled=true;
 });
 
-/* ---------- IA para cupones de app ---------- */
 async function consultarAppIA(r,apiKey,modelo,signal){
- const hoyStr=new Date().toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
- const prompt=`Eres un investigador de promociones en apps de comida rápida en Chile. Hoy es ${hoyStr}.
-Busca en internet cupones y promociones VIGENTES disponibles EXCLUSIVAMENTE en la app móvil de "${r.nombre}" (${r.tipo}, Chile).
-Reglas estrictas:
-1. Solo promos que se obtienen al usar la app (sección cupones, códigos, ofertas en app).
-2. No inventes. Si no encuentras, responde lista vacía.
-3. "medioPago": uno de: "todos" (cualquier pago), "app" (solo pagar dentro de la app), "tarjetas", "efectivo", "webpay", u otro texto corto.
-4. "dias": 0=Dom,1=Lun,2=Mar,3=Mié,4=Jue,5=Vie,6=Sáb. "all" si es todos los días.
-5. "fuente": URL de la app o donde se publicó.
-Responde SOLO JSON: {"cupones":[{"titulo":"<ej: 2x1 Big Mac>","detalle":"<cómo canjear>","medioPago":"<todos|app|tarjetas|efectivo|webpay|otro>","dias":"all","vigencia":"<hasta>","fuente":"<url>"}]}
-Si no hay cupones, responde {"cupones":[]}.`;
+ const mv=getMesesValidos();
+ const fechaStr=new Date().toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ const rangoFechas=mv.map(m=>mesTexto(m.mes)+' '+m.anio).join(', ');
+ const mesActual=mesTexto(mv[0].mes);const anioActual=mv[0].anio;
+ const prompt=`Eres un investigador de cupones en apps de comida rápida EN CHILE.
+HOY: ${fechaStr}.
+MESES VÁLIDOS (SOLO estos): ${rangoFechas}.
+Mes ACTUAL: ${mesActual} ${anioActual}.
+TAREA: buscar SOLO cupones/promos VIGENTES publicados en ${mesActual} ${anioActual} disponibles EXCLUSIVAMENTE en la app móvil de "${r.nombre}" (${r.tipo}, Chile).
+REGLAS DE FECHA:
+1. RECHAZA cualquier cupón cuya vigencia sea anterior a ${mesActual} ${anioActual}.
+2. RECHAZA cupones con fecha 2024, 2025, o meses pasados del ${anioActual} (enero-julio).
+3. Si NO hay cupones vigentes, responde {"cupones":[]}. NO INVENTES.
+FORMATO JSON:
+{"cupones":[{"titulo":"<ej: 2x1 Big Mac>","detalle":"<cómo canjear>","medioPago":"<todos|app|tarjetas|efectivo|webpay|otro: detalle>","dias":"all","vigencia":"<agosto 2026>","fuente":"<url>"}]}
+"dias": 0=Dom,1=Lun,...,6=Sáb. "all" si es todos los días.`;
  let texto;
  try{texto=await llamarGemini(apiKey,modelo,prompt,true);}
  catch(e){if(signal?.aborted)throw new Error('Cancelado');texto=await llamarGemini(apiKey,modelo,prompt,false);}
  let json;
  try{json=extraerJSON(texto);}catch(e){throw new Error('JSON inválido');}
  const arr=Array.isArray(json)?json:(json.cupones||json.resultados||[]);
- const nuevas=[];
+ const nuevas=[];let descartadas=0;
+ const fechaConsulta=new Date();
  for(const it of arr){
   if(!it||typeof it!=='object')continue;
+  if(esVigenciaAntigua(it.vigencia,fechaConsulta)){descartadas++;continue;}
   const pago=String(it.medioPago||'todos').toLowerCase().trim();
   const pagoNorm=['todos','app','tarjetas','efectivo','webpay'].includes(pago)?pago:('otro: '+pago);
   nuevas.push({
@@ -793,49 +812,49 @@ Si no hay cupones, responde {"cupones":[]}.`;
    detalle:String(it.detalle||'').slice(0,300),
    medioPago:pagoNorm,
    dias:normalizarDias(it.dias),
-   vigencia:String(it.vigencia||'Confirmar').slice(0,80),
+   vigencia:String(it.vigencia||mesTexto(mv[0].mes)+' '+mv[0].anio).slice(0,80),
    fuente:String(it.fuente||'').slice(0,300)||r.web||'',
    verificado:false,origen:'ia',fecha:new Date().toLocaleDateString('es-CL')
   });
  }
- const idsNuevos=new Set(nuevas.map(p=>normalizarNombre(p.titulo)));
- state.apps=state.apps.filter(a=>!(a.restaurante===r.id&&a.origen==='ia'&&idsNuevos.has(normalizarNombre(a.titulo))));
+ state.apps=state.apps.filter(a=>!(a.restaurante===r.id&&a.origen==='ia'&&nuevas.some(n=>normalizarNombre(n.titulo)===normalizarNombre(a.titulo))));
  state.apps.push(...nuevas);
- return nuevas;
+ return {nuevas,descartadas};
 }
 
 let actualizandoApp=false,signalIAApp=null;
 async function actualizarAppsIA(){
  if(actualizandoApp)return;
  const apiKey=(state.apiKey||$('#apiKeyInput').value||'').trim();
- if(!apiKey){logIA('⚠️ Pega y guarda tu API key primero.','err');notificar('Sin API key','Configúrala arriba.','err');return;}
- if(state.favoritos.length===0){logIA('⚠️ Marca favoritos primero.','err');notificar('Faltan favoritos','Marca tus restaurantes primero.','err');return;}
+ if(!apiKey){logIA('⚠️ Pega tu API key.','err');notificar('Sin API key','Configúrala arriba.','err');return;}
+ if(state.favoritos.length===0){logIA('⚠️ Marca favoritos.','err');notificar('Faltan favoritos','Marca restaurantes primero.','err');return;}
  actualizandoApp=true;signalIAApp={aborted:false};
  const btn=$('#btnIAApp'),btnC=$('#btnCancelarIAApp');
  btn.disabled=true;btnC.style.display='inline-flex';btnC.disabled=false;
  $('#estadoIA').innerHTML='';
  const favs=state.favoritos.map(id=>REST_MAP[id]).filter(Boolean).slice(0,10);
- let total=0;
- logIA(`📱 Buscando cupones de apps en ${favs.length} restaurante(s)…`);
- notificar('📱 Buscando cupones de apps',`Consultando ${favs.length} app(s)…`,'ia');
+ let total=0;let totalDesc=0;
+ logIA(`📱 Buscando cupones SOLO del mes (${mesTexto(getMesesValidos()[0].mes)} ${getMesesValidos()[0].anio})…`);
+ notificar('📱 Cupones de apps','Filtrando solo vigencia actual.','ia');
  for(let i=0;i<favs.length;i++){
   if(signalIAApp.aborted){logIA('⛔ Cancelado.','');break;}
   const r=favs[i];
   logIA(`📱 [${i+1}/${favs.length}] ${r.emoji} ${r.nombre}…`);
   try{
-   const nuevas=await consultarAppIA(r,apiKey,state.modelo||'gemini-2.0-flash',signalIAApp);
-   logIA(`✅ ${r.nombre}: ${nuevas.length} cupón(es).`,nuevas.length?'ok':'');
+   const {nuevas,descartadas}=await consultarAppIA(r,apiKey,state.modelo||'gemini-2.0-flash',signalIAApp);
+   logIA(`✅ ${r.nombre}: ${nuevas.length} cupón(es)${descartadas?' · 🗑️ '+descartadas+' antiguos descartados':''}.`,nuevas.length?'ok':'');
+   total+=nuevas.length;totalDesc+=descartadas;
    if(nuevas.length>0){
-    total+=nuevas.length;
     notificar(`📱 ${r.nombre} · ${nuevas.length} cupón(es)`,
      nuevas.slice(0,3).map(p=>`• ${p.titulo} (${pagoTexto(p.medioPago)})`).join('<br>'),'app',6000);
    }
   }catch(err){logIA(`❌ ${r.nombre}: ${err.message}`,'err');}
   guardar();renderResultados();
-  if(i<favs.length-1&&!signalIAApp.aborted){logIA('⏳ Esperando 15s…');await delay(15000);}
+  if(i<favs.length-1&&!signalIAApp.aborted){logIA('⏳ 15s…');await delay(15000);}
  }
- logIA(`🏁 Total: ${total} cupones nuevos.`,'ok');
- if(total>0)notificar('✅ Cupones de app actualizados',`${total} cupón(es) agregado(s).`,'ok',6000);
+ logIA(`🏁 ${total} nuevos · ${totalDesc} antiguos descartados.`,'ok');
+ if(total>0)notificar('✅ Cupones actualizados',`${total} nuevos, ${totalDesc} antiguos descartados.`,'ok',6000);
+ if(totalDesc>0&&total===0)notificar('⚠️ Sin cupones vigentes',`Solo se encontraron ${totalDesc} cupones vencidos.`,'warn',7000);
  actualizandoApp=false;btn.disabled=false;btnC.style.display='none';
 }
 $('#btnIAApp').addEventListener('click',actualizarAppsIA);
@@ -849,12 +868,10 @@ $('#btnGuardarKey').addEventListener('click',()=>{
  logIA(state.apiKey?'🔑 API key guardada.':'🗑️ API key eliminada.','ok');
 });
 
-/* ---------- Búsqueda manual ---------- */
 function abrirBusqueda(){
  const cont=$('#listaBusqueda');
- if(state.favoritos.length===0){
-  cont.innerHTML='<div class="vacio">Marca favoritos primero.</div>';
- }else{
+ if(state.favoritos.length===0){cont.innerHTML='<div class="vacio">Marca favoritos primero.</div>';}
+ else{
   let html='<h4>🏦 Promos bancarias</h4>';
   state.bancos.forEach(bid=>{
    const b=BAN_MAP[bid];if(!b)return;
@@ -878,7 +895,6 @@ $('#btnBuscarOnline').addEventListener('click',abrirBusqueda);
 $('#btnCerrarBusqueda').addEventListener('click',()=>$('#overlayBusqueda').classList.remove('abierto'));
 $('#overlayBusqueda').addEventListener('click',e=>{if(e.target.id==='overlayBusqueda')e.target.classList.remove('abierto');});
 
-/* ---------- Modal promo bancaria ---------- */
 let editando=null;
 function llenarSelects(){
  $('#fRest').innerHTML=state.listaRestaurantes.map(r=>`<option value="${r.id}">${r.emoji} ${r.nombre}</option>`).join('');
@@ -886,15 +902,12 @@ function llenarSelects(){
  $('#aRest').innerHTML=state.listaRestaurantes.map(r=>`<option value="${r.id}">${r.emoji} ${r.nombre}</option>`).join('');
 }
 function abrirModal(p){
- llenarSelects();
- editando=p?p.id:null;
- $('#modalTitulo').textContent=p?'✏️ Editar promoción':'➕ Agregar promoción';
+ llenarSelects();editando=p?p.id:null;
+ $('#modalTitulo').textContent=p?'✏️ Editar':'➕ Agregar';
  $('#fRest').value=p?p.restaurante:(state.listaRestaurantes[0]?.id||'');
  $('#fBanco').value=p?p.banco:(state.listaBancos[0]?.id||'');
- $('#fTitulo').value=p?p.titulo:'';
- $('#fDetalle').value=p?(p.detalle||''):'';
- $('#fTope').value=p?(p.tope||''):'';
- $('#fVigencia').value=p?(p.vigencia||''):'';
+ $('#fTitulo').value=p?p.titulo:'';$('#fDetalle').value=p?(p.detalle||''):'';
+ $('#fTope').value=p?(p.tope||''):'';$('#fVigencia').value=p?(p.vigencia||''):'';
  $('#fFuente').value=p?(p.fuente||''):(BAN_MAP[$('#fBanco').value]?.url||'');
  $('#fAll').checked=p?p.dias==='all':false;
  document.querySelectorAll('.dia').forEach(c=>{c.checked=p&&p.dias!=='all'&&p.dias.includes(Number(c.value));c.disabled=$('#fAll').checked;});
@@ -905,37 +918,27 @@ $('#btnAgregar').addEventListener('click',()=>abrirModal(null));
 $('#btnCancelar').addEventListener('click',cerrarModal);
 $('#overlay').addEventListener('click',e=>{if(e.target.id==='overlay')cerrarModal();});
 $('#fAll').addEventListener('change',e=>{document.querySelectorAll('.dia').forEach(c=>{c.disabled=e.target.checked;if(e.target.checked)c.checked=false;});});
-$('#fBanco').addEventListener('change',e=>{
- const url=BAN_MAP[e.target.value]?.url||'',f=$('#fFuente');
- if(!editando||!f.value)f.value=url;
-});
+$('#fBanco').addEventListener('change',e=>{const url=BAN_MAP[e.target.value]?.url||'',f=$('#fFuente');if(!editando||!f.value)f.value=url;});
 $('#formPromo').addEventListener('submit',e=>{
  e.preventDefault();
  const dias=$('#fAll').checked?'all':[...document.querySelectorAll('.dia:checked')].map(c=>Number(c.value));
  if(dias!=='all'&&dias.length===0){alert('Selecciona al menos un día.');return;}
  const datos={restaurante:$('#fRest').value,banco:$('#fBanco').value,titulo:$('#fTitulo').value.trim(),detalle:$('#fDetalle').value.trim(),dias,tope:$('#fTope').value.trim(),vigencia:$('#fVigencia').value.trim(),fuente:$('#fFuente').value.trim(),tipo:'banco'};
  if(!datos.titulo){alert('Título obligatorio.');return;}
- if(editando){Object.assign(state.promos.find(x=>x.id===editando),datos);notificar('✏️ Promo editada',datos.titulo,'ok');}
- else{
-  state.promos.push({id:'u'+Date.now(),verificado:false,origen:'manual',...datos});
-  notificar('➕ Nueva promo agregada',`${datos.titulo} en ${REST_MAP[datos.restaurante]?.nombre}`,'ok');
- }
+ if(editando){Object.assign(state.promos.find(x=>x.id===editando),datos);notificar('✏️ Editada',datos.titulo,'ok');}
+ else{state.promos.push({id:'u'+Date.now(),verificado:false,origen:'manual',...datos});notificar('➕ Nueva promo',`${datos.titulo} en ${REST_MAP[datos.restaurante]?.nombre}`,'ok');}
  guardar();cerrarModal();renderResultados();
 });
 
-/* ---------- Modal cupón de app ---------- */
 let editandoApp=null;
 function abrirModalApp(a){
- llenarSelects();
- editandoApp=a?a.id:null;
- $('#modalTituloApp').textContent=a?'✏️ Editar cupón':'➕ Agregar cupón de app';
+ llenarSelects();editandoApp=a?a.id:null;
+ $('#modalTituloApp').textContent=a?'✏️ Editar cupón':'➕ Cupón de app';
  $('#aRest').value=a?a.restaurante:(state.listaRestaurantes[0]?.id||'');
- $('#aTitulo').value=a?a.titulo:'';
- $('#aDetalle').value=a?(a.detalle||''):'';
+ $('#aTitulo').value=a?a.titulo:'';$('#aDetalle').value=a?(a.detalle||''):'';
  $('#aPago').value=a?(a.medioPago||'todos').split(':')[0].trim():'todos';
  $('#aPagoOtro').value=a&&a.medioPago&&a.medioPago.includes(':')?a.medioPago.split(':')[1].trim():'';
- $('#aVigencia').value=a?(a.vigencia||''):'';
- $('#aFuente').value=a?(a.fuente||''):'';
+ $('#aVigencia').value=a?(a.vigencia||''):'';$('#aFuente').value=a?(a.fuente||''):'';
  $('#aAll').checked=a?a.dias==='all':false;
  document.querySelectorAll('.dia-app').forEach(c=>{c.checked=a&&a.dias!=='all'&&a.dias.includes(Number(c.value));c.disabled=$('#aAll').checked;});
  $('#overlayApp').classList.add('abierto');
@@ -950,74 +953,49 @@ $('#formApp').addEventListener('submit',e=>{
  const dias=$('#aAll').checked?'all':[...document.querySelectorAll('.dia-app:checked')].map(c=>Number(c.value));
  if(dias!=='all'&&dias.length===0){alert('Selecciona al menos un día.');return;}
  let pago=$('#aPago').value;
- if(pago==='otro'){
-  const otro=$('#aPagoOtro').value.trim();
-  if(!otro){alert('Especifica el medio de pago.');return;}
-  pago='otro: '+otro;
- }
+ if(pago==='otro'){const otro=$('#aPagoOtro').value.trim();if(!otro){alert('Especifica el medio.');return;}pago='otro: '+otro;}
  const datos={restaurante:$('#aRest').value,titulo:$('#aTitulo').value.trim(),detalle:$('#aDetalle').value.trim(),medioPago:pago,dias,vigencia:$('#aVigencia').value.trim(),fuente:$('#aFuente').value.trim(),tipo:'app'};
  if(!datos.titulo){alert('Título obligatorio.');return;}
- if(editandoApp){Object.assign(state.apps.find(x=>x.id===editandoApp),datos);notificar('✏️ Cupón editado',datos.titulo,'ok');}
- else{
-  state.apps.push({id:'ua'+Date.now(),verificado:false,origen:'manual',...datos});
-  notificar('📱 Nuevo cupón agregado',`${datos.titulo} en ${REST_MAP[datos.restaurante]?.nombre}`,'app');
- }
+ if(editandoApp){Object.assign(state.apps.find(x=>x.id===editandoApp),datos);notificar('✏️ Editado',datos.titulo,'ok');}
+ else{state.apps.push({id:'ua'+Date.now(),verificado:false,origen:'manual',...datos});notificar('📱 Nuevo cupón',`${datos.titulo}`,'app');}
  guardar();cerrarModalApp();renderResultados();
 });
 
-/* ---------- EXPORTAR A PDF ---------- */
+/* ---------- PDF ---------- */
 $('#btnExportarPDF').addEventListener('click',()=>{
  const {jsPDF}=window.jspdf;
  const doc=new jsPDF();
  const hoy=new Date().toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
- 
- doc.setFontSize(18);
- doc.setTextColor(220,38,38);
- doc.text('🍔 Promos Fast Food Chile 💳',14,18);
- 
- doc.setFontSize(10);
- doc.setTextColor(100);
+ const mv=getMesesValidos();
+ const rango=mv.map(m=>mesTexto(m.mes)+' '+m.anio).join(' – ');
+ doc.setFontSize(18);doc.setTextColor(220,38,38);
+ doc.text('Promos Fast Food Chile',14,18);
+ doc.setFontSize(10);doc.setTextColor(100);
  doc.text('Generado: '+hoy,14,26);
- 
- let y=36;
- 
- // Promos bancarias
- const favs=state.favoritos;
- const bancos=state.bancos;
- const hoyDia=new Date().getDay();
+ doc.text('Vigencia: '+rango,14,32);
+ let y=42;
+ const favs=state.favoritos,bancos=state.bancos,hoyDia=new Date().getDay();
  const promosFiltro=state.promos.filter(p=>favs.includes(p.restaurante)&&bancos.includes(p.banco));
- 
  doc.setFontSize(14);doc.setTextColor(0,51,153);
- doc.text('🏦 Promociones bancarias',14,y);y+=8;
- 
+ doc.text('Promociones bancarias',14,y);y+=8;
  doc.setFontSize(9);doc.setTextColor(40);
- if(promosFiltro.length===0){
-  doc.text('(No hay promociones para tus selecciones actuales)',14,y);y+=7;
- }else{
-  // Agrupar por banco
+ if(promosFiltro.length===0){doc.text('(Sin promos)',14,y);y+=7;}
+ else{
   const porBanco={};
-  promosFiltro.forEach(p=>{
-   if(!porBanco[p.banco])porBanco[p.banco]=[];
-   porBanco[p.banco].push(p);
-  });
+  promosFiltro.forEach(p=>{if(!porBanco[p.banco])porBanco[p.banco]=[];porBanco[p.banco].push(p);});
   for(const bid of Object.keys(porBanco)){
    const b=BAN_MAP[bid]||{nombre:bid};
-   doc.setFont(undefined,'bold');doc.setTextColor(0,51,153);
-   doc.text('• '+b.nombre,14,y);y+=5;
+   doc.setFont(undefined,'bold');doc.setTextColor(0,51,153);doc.text('• '+b.nombre,14,y);y+=5;
    doc.setFont(undefined,'normal');doc.setTextColor(40);
    porBanco[bid].forEach(p=>{
     const r=REST_MAP[p.restaurante]||{nombre:p.restaurante};
     if(y>270){doc.addPage();y=20;}
-    doc.setFont(undefined,'bold');
-    doc.text(r.emoji+' '+r.nombre+': '+p.titulo,18,y);y+=4;
+    doc.setFont(undefined,'bold');doc.text(r.emoji+' '+r.nombre+': '+p.titulo,18,y);y+=4;
     doc.setFont(undefined,'normal');
-    if(p.detalle){
-     const det=doc.splitTextToSize(p.detalle,170);
-     doc.text(det,18,y);y+=det.length*4;
-    }
+    if(p.detalle){const det=doc.splitTextToSize(p.detalle,170);doc.text(det,18,y);y+=det.length*4;}
     let info='';
-    if(p.dias==='all')info+='🗓️ Todos los días';
-    else if(Array.isArray(p.dias))info+='🗓️ '+p.dias.map(d=>DIAS_CORTO[d]).join(', ');
+    if(p.dias==='all')info+='Todos los dias';
+    else if(Array.isArray(p.dias))info+=p.dias.map(d=>DIAS_CORTO[d]).join(', ');
     if(p.tope)info+=' · '+p.tope;
     doc.text(info,22,y);y+=4;
     if(p.vigencia)doc.text('Vigencia: '+p.vigencia,22,y),y+=4;
@@ -1026,41 +1004,26 @@ $('#btnExportarPDF').addEventListener('click',()=>{
    });
   }
  }
- 
- y+=6;
- if(y>240){doc.addPage();y=20;}
- 
- // Cupones de apps
- doc.setFontSize(14);doc.setTextColor(245,158,11);
- doc.text('📱 Cupones exclusivos de apps',14,y);y+=8;
- 
+ y+=6;if(y>240){doc.addPage();y=20;}
+ doc.setFontSize(14);doc.setTextColor(245,158,11);doc.text('Cupones exclusivos de apps',14,y);y+=8;
  doc.setFontSize(9);doc.setTextColor(40);
  const appsFiltro=state.apps.filter(a=>favs.includes(a.restaurante));
- if(appsFiltro.length===0){
-  doc.text('(No hay cupones de app para tus selecciones actuales)',14,y);y+=7;
- }else{
+ if(appsFiltro.length===0){doc.text('(Sin cupones)',14,y);y+=7;}
+ else{
   const porRest={};
-  appsFiltro.forEach(a=>{
-   if(!porRest[a.restaurante])porRest[a.restaurante]=[];
-   porRest[a.restaurante].push(a);
-  });
+  appsFiltro.forEach(a=>{if(!porRest[a.restaurante])porRest[a.restaurante]=[];porRest[a.restaurante].push(a);});
   for(const rid of Object.keys(porRest)){
    const r=REST_MAP[rid]||{nombre:rid};
-   doc.setFont(undefined,'bold');doc.setTextColor(245,158,11);
-   doc.text('• '+r.emoji+' '+r.nombre,14,y);y+=5;
+   doc.setFont(undefined,'bold');doc.setTextColor(245,158,11);doc.text('• '+r.emoji+' '+r.nombre,14,y);y+=5;
    doc.setFont(undefined,'normal');doc.setTextColor(40);
    porRest[rid].forEach(a=>{
     if(y>270){doc.addPage();y=20;}
-    doc.setFont(undefined,'bold');
-    doc.text(a.titulo,18,y);y+=4;
+    doc.setFont(undefined,'bold');doc.text(a.titulo,18,y);y+=4;
     doc.setFont(undefined,'normal');
-    if(a.detalle){
-     const det=doc.splitTextToSize(a.detalle,170);
-     doc.text(det,18,y);y+=det.length*4;
-    }
-    let info='💳 '+pagoTexto(a.medioPago);
-    if(a.dias==='all')info+=' · 🗓️ Todos los días';
-    else if(Array.isArray(a.dias))info+=' · 🗓️ '+a.dias.map(d=>DIAS_CORTO[d]).join(', ');
+    if(a.detalle){const det=doc.splitTextToSize(a.detalle,170);doc.text(det,18,y);y+=det.length*4;}
+    let info=pagoTexto(a.medioPago);
+    if(a.dias==='all')info+=' · Todos los dias';
+    else if(Array.isArray(a.dias))info+=' · '+a.dias.map(d=>DIAS_CORTO[d]).join(', ');
     doc.text(info,22,y);y+=4;
     if(a.vigencia)doc.text('Vigencia: '+a.vigencia,22,y),y+=4;
     if(a.fuente)doc.text('Fuente: '+a.fuente,22,y),y+=4;
@@ -1068,36 +1031,28 @@ $('#btnExportarPDF').addEventListener('click',()=>{
    });
   }
  }
- 
  doc.save('promos-chile-'+new Date().toISOString().slice(0,10)+'.pdf');
- notificar('📄 PDF descargado',`${promosFiltro.length} promos bancarias · ${appsFiltro.length} cupones de app`,'ok');
+ notificar('📄 PDF descargado',`${promosFiltro.length} promos · ${appsFiltro.length} cupones`,'ok');
 });
 
-/* ---------- Modo oscuro ---------- */
 $('#btnDark').addEventListener('click',()=>{
  state.dark=!state.dark;
  document.body.classList.toggle('dark',state.dark);
  $('#btnDark').textContent=state.dark?'☀️ Claro':'🌙 Oscuro';
  guardar();
 });
-
-/* ---------- Reset ---------- */
 $('#btnReset').addEventListener('click',()=>{
- if(confirm('¿Reiniciar todo? Se borrarán selecciones, entidades personalizadas, promos, cupones y API key.')){
-  localStorage.removeItem(KEY);location.reload();
- }
+ if(confirm('¿Reiniciar todo? Se borrarán selecciones, entidades, promos y API key.')){localStorage.removeItem(KEY);location.reload();}
 });
 
-/* ---------- Init ---------- */
 const hoy=new Date();
 $('#fechaHoy').textContent='📆 '+hoy.toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-$('#nombreHoy').textContent='Muestra solo las que aplican '+DIAS[hoy.getDay()].toLowerCase();
+$('#nombreHoy').textContent='Solo las que aplican '+DIAS[hoy.getDay()].toLowerCase();
 $('#apiKeyInput').value=state.apiKey||'';
 $('#modeloSel').value=state.modelo||'gemini-2.0-flash';
 if(state.dark){document.body.classList.add('dark');$('#btnDark').textContent='☀️ Claro';}
-rebuildMapas();
-renderTodo();
-setTimeout(()=>notificar('¡Bienvenido!','Marcá tus favoritos y bancos para empezar.','info',4000),400);
+rebuildMapas();renderTodo();
+setTimeout(()=>notificar('¡Hola Ricardo!','Versión con filtro de vigencia actual.','info',4500),400);
 </script>
 </body>
 </html>
