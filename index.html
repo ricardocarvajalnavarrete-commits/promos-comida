@@ -130,7 +130,7 @@ body.dark .link-busqueda{background:#1e3a5f;color:#93c5fd}
 </header>
 
 <main>
-  <div class="aviso">🆕 <b>Nuevo:</b> sección 🛵 <b>Apps de delivery y billeteras de pago</b>, y al crear una promo bancaria eliges el canal: 🏦→🍽️ <b>directo con restaurante</b> o 🏦→🛵 <b>banco con aplicación</b> (restaurante opcional).</div>
+  <div class="aviso">🛡️ Apps de delivery/billeteras + promos <b>banco con aplicación</b> (restaurante opcional). Formularios sin bloqueos del navegador.</div>
 
   <section class="paso">
     <h2><span class="num">⚙️</span> Conexión con Gemini</h2>
@@ -234,18 +234,18 @@ body.dark .link-busqueda{background:#1e3a5f;color:#93c5fd}
 <!-- Modal promo bancaria (con selector de canal) -->
 <div class="overlay" id="overlay"><div class="modal">
   <h3 id="modalTitulo">➕ Agregar promoción</h3>
-  <form id="formPromo">
+  <form id="formPromo" novalidate>
     <label>Tipo de promoción *</label>
     <div class="modos">
       <div class="modo modo-canal" data-canal="directa" id="canalDirecta"><div class="grande">🏦→🍽️</div><div class="chico">Banco directo con restaurante</div></div>
-      <div class="modo modo-canal" data-canal="app" id="canalApp"><div class="grande">🏦→</div><div class="chico">Banco con aplicación</div></div>
+      <div class="modo modo-canal" data-canal="app" id="canalApp"><div class="grande">🏦→🛵</div><div class="chico">Banco con aplicación</div></div>
     </div>
-    <label>Banco / entidad financiera</label><select id="fBanco" required></select>
+    <label>Banco / entidad financiera</label><select id="fBanco"></select>
     <div id="campoApp" style="display:none">
       <label>Aplicación *</label><select id="fAppExt"></select>
     </div>
     <label id="lblRest">Restaurante *</label><select id="fRest"></select>
-    <label>Título *</label><input type="text" id="fTitulo" required>
+    <label>Título *</label><input type="text" id="fTitulo">
     <label>Detalle</label><textarea id="fDetalle" rows="2"></textarea>
     <label>Días</label>
     <div class="dias-check">
@@ -276,10 +276,10 @@ body.dark .link-busqueda{background:#1e3a5f;color:#93c5fd}
 <!-- Modal promo club -->
 <div class="overlay" id="overlayClub"><div class="modal">
   <h3 id="modalTituloClub">➕ Agregar promo de club</h3>
-  <form id="formClub">
-    <label>Restaurante</label><select id="kRest" required></select>
-    <label>Club de fidelidad</label><select id="kClub" required></select>
-    <label>Título *</label><input type="text" id="kTitulo" required>
+  <form id="formClub" novalidate>
+    <label>Restaurante</label><select id="kRest"></select>
+    <label>Club de fidelidad</label><select id="kClub"></select>
+    <label>Título *</label><input type="text" id="kTitulo">
     <label>Detalle</label><textarea id="kDetalle" rows="2"></textarea>
     <label>Días</label>
     <div class="dias-check">
@@ -310,9 +310,9 @@ body.dark .link-busqueda{background:#1e3a5f;color:#93c5fd}
 <!-- Modal cupón app restaurante -->
 <div class="overlay" id="overlayApp"><div class="modal">
   <h3 id="modalTituloApp">➕ Agregar cupón de app</h3>
-  <form id="formApp">
-    <label>Restaurante</label><select id="aRest" required></select>
-    <label>Título *</label><input type="text" id="aTitulo" required>
+  <form id="formApp" novalidate>
+    <label>Restaurante</label><select id="aRest"></select>
+    <label>Título *</label><input type="text" id="aTitulo">
     <label>Detalle</label><textarea id="aDetalle" rows="2"></textarea>
     <label>Medio de pago</label>
     <select id="aPago">
@@ -383,16 +383,16 @@ const REST_DEFAULT=[
  {id:'papajohns',nombre:"Papa John's",tipo:'Pizzas',emoji:'🍕',web:'https://www.papajohns.cl'},
  {id:'dominos',nombre:"Domino's Pizza",tipo:'Pizzas',emoji:'🍕',web:'https://www.dominos.cl'},
  {id:'telepizza',nombre:'Telepizza',tipo:'Pizzas',emoji:'🍕',web:'https://www.telepizza.cl'},
- {id:'doggis',nombre:'Doggis',tipo:'Completos 🇨',emoji:'🌭',web:'https://www.doggis.cl'},
- {id:'pedrojuan',nombre:'Pedro, Juan y Diego',tipo:'Hamburguesas 🇨🇱',emoji:'🍔',web:'https://www.pedrojuanydiego.cl'},
+ {id:'doggis',nombre:'Doggis',tipo:'Completos 🇨',emoji:'',web:'https://www.doggis.cl'},
+ {id:'pedrojuan',nombre:'Pedro, Juan y Diego',tipo:'Hamburguesas 🇨',emoji:'🍔',web:'https://www.pedrojuanydiego.cl'},
  {id:'tarragona',nombre:'Tarragona',tipo:'Pollo frito 🇨🇱',emoji:'🍗',web:'https://www.tarragona.cl'},
  {id:'juanmaestro',nombre:'Juan Maestro',tipo:'Sánguches 🇨🇱',emoji:'🥪',web:'https://www.juanmaestro.cl'},
- {id:'fuentesoda',nombre:'Fuente Soda',tipo:'Clásicos 🇨',emoji:'🥤',web:'https://www.fuentesoda.cl'},
+ {id:'fuentesoda',nombre:'Fuente Soda',tipo:'Clásicos 🇨🇱',emoji:'🥤',web:'https://www.fuentesoda.cl'},
  {id:'tommybeans',nombre:'Tommy Beans',tipo:'Mexicana 🇨🇱',emoji:'🌯',web:'https://www.tommybeans.cl'},
  {id:'subway',nombre:'Subway',tipo:'Sándwiches',emoji:'🥖',web:'https://www.subway.com/es-CL'},
  {id:'starbucks',nombre:'Starbucks',tipo:'Café',emoji:'☕',web:'https://www.starbucks.cl'},
  {id:'dunkin',nombre:"Dunkin'",tipo:'Donuts · Café',emoji:'🍩',web:'https://www.dunkinchile.cl'},
- {id:'elkiosko',nombre:'El Kiosko',tipo:'Hamburguesas 🇨🇱',emoji:'🍟',web:'https://www.elkiosko.cl'}
+ {id:'elkiosko',nombre:'El Kiosko',tipo:'Hamburguesas 🇨',emoji:'🍟',web:'https://www.elkiosko.cl'}
 ];
 const BANC_DEFAULT=[
  {id:'bancochile',nombre:'Banco de Chile',tipo:'Banco',emoji:'🏦',url:'https://www.bancochile.cl'},
@@ -454,11 +454,11 @@ const APPS_SEED=[
  {id:'a3',restaurante:'kfc',titulo:'Balde familiar con descuento',detalle:'Cupón exclusivo en app KFC.',medioPago:'todos',dias:[5,6,0],vigencia:'Agosto 2026',fuente:'https://www.kfc.cl/app',verificado:false,tipo:'app'},
  {id:'a4',restaurante:'dominos',titulo:'Pizza mediana a $4.990',detalle:'Cupón exclusivo por la app.',medioPago:'app',dias:[1,2,3],vigencia:'Agosto 2026',fuente:'https://www.dominos.cl/app',verificado:false,tipo:'app'}
 ];
-const EMOJIS_COMIDA=['🍔','🍕','🍗','🌭','🥪','🌮','🌯','🍟','🍣','🍪','🍰','🍦','🍩','','🥤','','🍝','','🥩','','🥑','','🍫','','🥐','','🫘','️'];
-const EMOJIS_FINANZAS=['🏦','💳','📱','💰','💵','💸','','🤝','','📈','','🏪','','💎',''];
+const EMOJIS_COMIDA=['🍔','🍕','🍗','🌭','🥪','🌮','🌯','🍟','🍣','🍪','🍰','🍦','🍩','🍫','🥤','🧋','','🍝','','🥑','','🍿','🥐','🥖','','🍽️'];
+const EMOJIS_FINANZAS=['🏦','💳','📱','💰','💵','💸','🪙','🤝','🧰','📈','','🏪','','💎','🔐'];
 const EMOJIS_CLUBES=['🎁','⭐','👑','📶','📡','📳','✈️','','🛍️','🎉','','💫'];
-const EMOJIS_APPS=['🛵','🛒','','⛽','','🍏','📲','🅿️','🌐','','🚗','✅'];
-const EMOJIS_OTROS=['🏍️','🚕','📍','🗓️','🔖','🏷️','✨','🆕'];
+const EMOJIS_APPS=['🛵','','💙','','👛','🍏','📲','🅿️','🌐','🚀','🚗','✅'];
+const EMOJIS_OTROS=['🏍️','','📍','🗓️','','🏷️','✨','🆕'];
 
 const DIAS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const DIAS_CORTO=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
@@ -588,7 +588,6 @@ function vincularCalendario(btnId,dateId,textId){
  });
 }
 
-/* ---------- Render ---------- */
 function renderRestaurantes(){
  $('#cFav').textContent=state.favoritos.length;
  $('#restaurantes').innerHTML=state.listaRestaurantes.map(r=>{
@@ -713,7 +712,7 @@ function renderResultados(){
   });
   lista.sort((a,b)=>(b.verificado-a.verificado));
   $('#cPromos').textContent=lista.length;
-  cont.innerHTML=lista.length===0?'<div class="vacio">😕 Sin promos bancarias. Usa 🤖, 🌐 o ➕.</div>':`<div class="grid-promos">${lista.map(p=>promoCardBanco(p,hoy)).join('')}</div>`;
+  cont.innerHTML=lista.length===0?'<div class="vacio">😕 Sin promos bancarias. Usa 🤖,  o ➕.</div>':`<div class="grid-promos">${lista.map(p=>promoCardBanco(p,hoy)).join('')}</div>`;
  }
  const contC=$('#resultadosClub');
  if(state.favoritos.length===0){contC.innerHTML='<div class="vacio">👆 Marca tus favoritos.</div>';$('#cPromosClub').textContent='';}
@@ -738,11 +737,10 @@ function renderResultados(){
  listaApp.sort((a,b)=>(b.verificado-a.verificado));
  $('#cApps').textContent=listaApp.length;
  if(state.favoritos.length===0)contA.innerHTML='<div class="vacio">👆 Marca tus favoritos.</div>';
- else contA.innerHTML=listaApp.length===0?'<div class="vacio">😕 Sin cupones. Usa 🤖 o .</div>':`<div class="grid-promos">${listaApp.map(a=>promoCardApp(a,hoy)).join('')}</div>`;
+ else contA.innerHTML=listaApp.length===0?'<div class="vacio">😕 Sin cupones. Usa 🤖 o ➕.</div>':`<div class="grid-promos">${listaApp.map(a=>promoCardApp(a,hoy)).join('')}</div>`;
 }
 function renderTodo(){renderRestaurantes();renderBancos();renderClubes();renderAppsExt();renderModos();renderResultados();}
 
-/* ---------- Selección ---------- */
 $('#restaurantes').addEventListener('click',e=>{
  const del=e.target.closest('.borrar-item');
  if(del){eliminarEntidad('rest',del.dataset.del);return;}
@@ -800,7 +798,6 @@ document.body.addEventListener('click',e=>{
  }
 });
 
-/* ---------- Entidades ---------- */
 let entidadTipo=null,editandoEntidad=null;
 function renderEmojiPicker(){
  $('#emojiPicker').innerHTML=
@@ -896,7 +893,6 @@ function eliminarEntidad(tipo,id){
  guardar();rebuildMapas();renderTodo();
 }
 
-/* ---------- IA ---------- */
 function logIA(msg,tipo){
  const color=tipo==='err'?'#b91c1c':tipo==='ok'?'#166534':'#374151';
  $('#estadoIA').innerHTML+=`<div style="color:${color}">${msg}</div>`;
@@ -953,7 +949,7 @@ HOY es: ${f.fechaStr}. MESES VÁLIDOS: ${f.rango}. Mes ACTUAL: ${f.mes} de ${f.a
 TAREA: buscar SOLO promociones VIGENTES publicadas en ${f.mes} de ${f.anio} (o meses siguientes indicados) del banco "${b.nombre}" (${b.tipo}, Chile) para pagar en: ${lista}.
 Incluye tanto promos directas en locales como promos para pedir por apps de delivery (Uber Eats, Rappi, PedidosYa) o billeteras de pago.
 REGLAS: 1) RECHAZA promos con vigencia anterior a ${f.mes} ${f.anio}. 2) RECHAZA promos "finalizó/vencida/caducada". 3) Si NO menciona vigencia clara, NO la incluyas. 4) NO INVENTES. 5) Si no hay nada, {"promos":[]}.
-FORMATO JSON: {"promos":[{"restaurante":"<nombre exacto o 'todos' si aplica a cualquier restaurante vía app>","titulo":"<descuento>","detalle":"<condiciones; indica si es vía alguna app de delivery>","dias":"all","tope":"<tope>","vigencia":"<ej: ${f.mes} ${f.anio}>","fuente":"<URL exacta>"}]}
+FORMATO JSON: {"promos":[{"restaurante":"<nombre exacto>","titulo":"<descuento>","detalle":"<condiciones; indica si es vía alguna app de delivery>","dias":"all","tope":"<tope>","vigencia":"<ej: ${f.mes} ${f.anio}>","fuente":"<URL exacta>"}]}
 "dias": 0=Dom,1=Lun,2=Mar,3=Mié,4=Jue,5=Vie,6=Sáb. "all" si es todos los días.`;
  let texto;
  try{texto=await llamarGemini(apiKey,modelo,prompt,true);}
@@ -964,19 +960,17 @@ FORMATO JSON: {"promos":[{"restaurante":"<nombre exacto o 'todos' si aplica a cu
  for(const it of arr){
   if(!it||typeof it!=='object')continue;
   if(esVigenciaAntigua(it.vigencia,fechaConsulta)){descartadas++;continue;}
-  const r=matchRestaurante(it.restaurante||'',favs);
-  nuevas.push({id:'ia'+Date.now()+Math.floor(Math.random()*9999),banco:b.id,restaurante:r?r.id:'',canal:r?'directa':'directa',
+  const r=matchRestaurante(it.restaurante||'',favs);if(!r)continue;
+  nuevas.push({id:'ia'+Date.now()+Math.floor(Math.random()*9999),banco:b.id,restaurante:r.id,canal:'directa',
    titulo:String(it.titulo||'Promo').slice(0,120),detalle:String(it.detalle||'').slice(0,300),
    dias:normalizarDias(it.dias),tope:String(it.tope||'').slice(0,120),
    vigencia:String(it.vigencia||f.mes+' '+f.anio).slice(0,80),fuente:String(it.fuente||'').slice(0,300)||b.url,
    verificado:false,origen:'ia',fecha:new Date().toLocaleDateString('es-CL')});
  }
- // Solo conservamos las que calzaron con un restaurante favorito (las "todos" vía app se pueden agregar manual)
- const validas=nuevas.filter(p=>p.restaurante);
- const idsR=new Set(validas.map(p=>p.restaurante));
- state.promos=state.promos.filter(p=>!(p.banco===b.id&&p.origen==='ia'&&idsR.has(p.restaurante)&&p.canal==='directa'));
- state.promos.push(...validas);
- return {nuevas:validas,descartadas};
+ const idsR=new Set(nuevas.map(p=>p.restaurante));
+ state.promos=state.promos.filter(p=>!(p.banco===b.id&&idsR.has(p.restaurante)&&p.origen!=='manual'&&p.canal==='directa'));
+ state.promos.push(...nuevas);
+ return {nuevas,descartadas};
 }
 async function consultarClubIA(c,favs,apiKey,modelo,signal){
  const lista=favs.map(r=>r.nombre).join(', ');
@@ -1181,7 +1175,6 @@ $('#btnBuscarOnline').addEventListener('click',abrirBusqueda);
 $('#btnCerrarBusqueda').addEventListener('click',()=>$('#overlayBusqueda').classList.remove('abierto'));
 $('#overlayBusqueda').addEventListener('click',e=>{if(e.target.id==='overlayBusqueda')e.target.classList.remove('abierto');});
 
-/* ---------- Modal promo bancaria con canal ---------- */
 let editando=null,canalActual='directa';
 function llenarSelects(){
  $('#fBanco').innerHTML=state.listaBancos.map(b=>`<option value="${b.id}">${b.emoji} ${b.nombre}</option>`).join('');
@@ -1228,18 +1221,17 @@ $('#formPromo').addEventListener('submit',e=>{
  const appExt=$('#fAppExt').value;
  if(canalActual==='directa'&&!restaurante){alert('Selecciona el restaurante.');return;}
  if(canalActual==='app'&&!appExt){alert('Selecciona la aplicación.');return;}
- const datos={restaurante:canalActual==='app'?restaurante:restaurante,banco:$('#fBanco').value,
+ const datos={restaurante:restaurante,banco:$('#fBanco').value,
   canal:canalActual,appExt:canalActual==='app'?appExt:null,
   titulo:$('#fTitulo').value.trim(),detalle:$('#fDetalle').value.trim(),dias,tope:$('#fTope').value.trim(),
   vigencia:$('#fVigencia').value.trim(),fuente:$('#fFuente').value.trim(),tipo:'banco'};
- if(!datos.titulo){alert('Título obligatorio.');return;}
+ if(!datos.titulo){alert('El título es obligatorio.');return;}
  if(canalActual==='app'&&appExt&&!state.appsExt.includes(appExt)){state.appsExt.push(appExt);}
  if(editando){Object.assign(state.promos.find(x=>x.id===editando),datos);notificar('✏️ Editada',datos.titulo,'ok');}
- else{state.promos.push({id:'u'+Date.now(),verificado:false,origen:'manual',...datos});notificar('➕ Nueva promo',`${datos.titulo}`,'ok');}
+ else{state.promos.push({id:'u'+Date.now(),verificado:false,origen:'manual',...datos});notificar('➕ Nueva promo',datos.titulo,'ok');}
  guardar();rebuildMapas();cerrarModal();renderTodo();
 });
 
-/* ---------- Modal club ---------- */
 let editandoClub=null;
 function abrirModalClub(p){
  llenarSelects();editandoClub=p?p.id:null;
@@ -1264,13 +1256,12 @@ $('#formClub').addEventListener('submit',e=>{
  const dias=$('#kAll').checked?'all':[...document.querySelectorAll('.dia-club:checked')].map(c=>Number(c.value));
  if(dias!=='all'&&dias.length===0){alert('Selecciona al menos un día.');return;}
  const datos={restaurante:$('#kRest').value,club:$('#kClub').value,titulo:$('#kTitulo').value.trim(),detalle:$('#kDetalle').value.trim(),dias,tope:$('#kTope').value.trim(),vigencia:$('#kVigencia').value.trim(),fuente:$('#kFuente').value.trim(),tipo:'club'};
- if(!datos.titulo){alert('Título obligatorio.');return;}
+ if(!datos.titulo){alert('El título es obligatorio.');return;}
  if(editandoClub){Object.assign(state.promosClub.find(x=>x.id===editandoClub),datos);notificar('✏️ Editada',datos.titulo,'ok');}
  else{state.promosClub.push({id:'uc'+Date.now(),verificado:false,origen:'manual',...datos});notificar('🎁 Nueva promo de club',datos.titulo,'club');}
  guardar();cerrarModalClub();renderResultados();
 });
 
-/* ---------- Modal cupón app ---------- */
 let editandoApp=null;
 function abrirModalApp(a){
  llenarSelects();editandoApp=a?a.id:null;
@@ -1296,13 +1287,12 @@ $('#formApp').addEventListener('submit',e=>{
  let pago=$('#aPago').value;
  if(pago==='otro'){const otro=$('#aPagoOtro').value.trim();if(!otro){alert('Especifica el medio.');return;}pago='otro: '+otro;}
  const datos={restaurante:$('#aRest').value,titulo:$('#aTitulo').value.trim(),detalle:$('#aDetalle').value.trim(),medioPago:pago,dias,vigencia:$('#aVigencia').value.trim(),fuente:$('#aFuente').value.trim(),tipo:'app'};
- if(!datos.titulo){alert('Título obligatorio.');return;}
+ if(!datos.titulo){alert('El título es obligatorio.');return;}
  if(editandoApp){Object.assign(state.apps.find(x=>x.id===editandoApp),datos);notificar('✏️ Editado',datos.titulo,'ok');}
  else{state.apps.push({id:'ua'+Date.now(),verificado:false,origen:'manual',...datos});notificar('📱 Nuevo cupón',datos.titulo,'app');}
  guardar();cerrarModalApp();renderResultados();
 });
 
-/* ---------- PDF ---------- */
 $('#btnExportarPDF').addEventListener('click',()=>{
  const {jsPDF}=window.jspdf;
  const doc=new jsPDF();
@@ -1406,7 +1396,6 @@ $('#btnExportarPDF').addEventListener('click',()=>{
  notificar('📄 PDF descargado',`${promosFiltro.length} bancarias · ${clubsFiltro.length} clubes · ${appsFiltro.length} apps`,'ok');
 });
 
-/* ---------- Respaldo ---------- */
 $('#btnBackup').addEventListener('click',()=>{
  const data=JSON.stringify(state,null,2);
  const blob=new Blob([data],{type:'application/json'});
@@ -1457,7 +1446,6 @@ $('#btnReset').addEventListener('click',()=>{
  if(confirm('¿Reiniciar todo? Se borrarán selecciones, entidades, promos y API key de ESTE navegador.')){localStorage.removeItem(KEY);location.reload();}
 });
 
-/* ---------- Init ---------- */
 const hoy=new Date();
 $('#fechaHoy').textContent='📆 '+hoy.toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 $('#nombreHoy').textContent='Solo las que aplican '+DIAS[hoy.getDay()].toLowerCase();
@@ -1469,7 +1457,7 @@ vincularCalendario('#kVigenciaBtn','#kVigenciaDate','#kVigencia');
 vincularCalendario('#aVigenciaBtn','#aVigenciaDate','#aVigencia');
 renderEmojiPicker();
 rebuildMapas();renderTodo();
-setTimeout(()=>notificar('¡Hola Ricardo!','Apps de delivery/billeteras y promos banco+app activas.','info',4500),400);
+setTimeout(()=>notificar('¡Hola Ricardo!','Listo: ya puedes guardar promos sin restaurante específico.','ok',5000),400);
 if(avisoMigracion){setTimeout(()=>notificar('📦 Datos recuperados','Migración automática desde versión anterior.','ok',7000),1200);}
 </script>
 </body>
