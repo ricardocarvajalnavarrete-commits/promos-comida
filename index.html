@@ -126,26 +126,29 @@ body.dark .link-busqueda{background:#1e3a5f;color:#93c5fd}
 <body>
 <header>
   <button class="toggle-dark" id="btnDark">🌙 Oscuro</button>
-  <h1>🍔 Promos Fast Food Chile 💳</h1>
+  <h1>🍔 Promos Fast Food Chile 🇨🇱</h1>
   <p>Favoritos + bancos + clubes + apps = descuentos a la mano</p>
   <p id="fechaHoy" style="margin-top:6px;font-size:.85rem"></p>
 </header>
 
 <main>
-  <div class="aviso">🆕 Los <b>clubes</b> ahora también aplican a <b>apps de delivery/billeteras</b> (restaurante opcional), y toda promo con <b>vigencia vencida</b> muestra aviso rojo para validarla.</div>
+  <div class="aviso">🧠 <b>Nuevo:</b> botón 🔬 <b>Detectar modelo</b> — prueba automáticamente qué modelos Gemini funcionan con tu key y cambia solo si uno queda sin cuota (adiós reintentos infinitos).</div>
 
   <section class="paso">
     <h2><span class="num">⚙️</span> Conexión con Gemini</h2>
-    <p class="ayuda">API key gratis en <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></p>
+    <p class="ayuda">API key gratis en <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> · usa 🔬 para encontrar el modelo disponible</p>
     <div class="config-fila">
       <input type="password" id="apiKeyInput" placeholder="Pega tu API key de Gemini">
       <select id="modeloSel">
-        <option value="gemini-2.0-flash">gemini-2.0-flash</option>
+        <option value="gemini-2.5-flash-lite">gemini-2.5-flash-lite</option>
+        <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+        <option value="gemini-3-flash">gemini-3-flash</option>
+        <option value="gemini-3-pro">gemini-3-pro</option>
         <option value="gemini-2.0-flash-lite">gemini-2.0-flash-lite</option>
-        <option value="gemini-1.5-flash">gemini-1.5-flash</option>
-        <option value="gemini-1.5-pro">gemini-1.5-pro</option>
+        <option value="gemini-2.0-flash">gemini-2.0-flash</option>
       </select>
       <button class="btn btn-gris" id="btnGuardarKey">💾 Guardar</button>
+      <button class="btn btn-celeste" id="btnDetectar">🔬 Detectar modelo</button>
     </div>
     <div id="estadoIA"></div>
   </section>
@@ -285,14 +288,14 @@ body.dark .link-busqueda{background:#1e3a5f;color:#93c5fd}
   </form>
 </div></div>
 
-<!-- Modal promo club (con canal restaurante/app) -->
+<!-- Modal promo club -->
 <div class="overlay" id="overlayClub"><div class="modal">
   <h3 id="modalTituloClub">➕ Agregar promo de club</h3>
   <form id="formClub" novalidate>
     <label>Tipo de promoción *</label>
     <div class="modos">
-      <div class="modo modo-canal" data-canalclub="directa" id="canalClubDirecta"><div class="grande">🎁→🍽️</div><div class="chico">Club con restaurante</div></div>
-      <div class="modo modo-canal" data-canalclub="app" id="canalClubApp"><div class="grande">🎁→</div><div class="chico">Club con app delivery/billetera</div></div>
+      <div class="modo modo-canal" data-canalclub="directa" id="canalClubDirecta"><div class="grande">🎁→️</div><div class="chico">Club con restaurante</div></div>
+      <div class="modo modo-canal" data-canalclub="app" id="canalClubApp"><div class="grande">🎁→🛵</div><div class="chico">Club con app delivery/billetera</div></div>
     </div>
     <label>Club de fidelidad</label><select id="kClub"></select>
     <div id="campoAppClub" style="display:none">
@@ -417,16 +420,16 @@ const REST_DEFAULT=[
  {id:'papajohns',nombre:"Papa John's",tipo:'Pizzas',emoji:'🍕',web:'https://www.papajohns.cl'},
  {id:'dominos',nombre:"Domino's Pizza",tipo:'Pizzas',emoji:'🍕',web:'https://www.dominos.cl'},
  {id:'telepizza',nombre:'Telepizza',tipo:'Pizzas',emoji:'🍕',web:'https://www.telepizza.cl'},
- {id:'doggis',nombre:'Doggis',tipo:'Completos 🇨🇱',emoji:'🌭',web:'https://www.doggis.cl'},
+ {id:'doggis',nombre:'Doggis',tipo:'Completos 🇨',emoji:'',web:'https://www.doggis.cl'},
  {id:'pedrojuan',nombre:'Pedro, Juan y Diego',tipo:'Hamburguesas 🇨🇱',emoji:'🍔',web:'https://www.pedrojuanydiego.cl'},
  {id:'tarragona',nombre:'Tarragona',tipo:'Pollo frito 🇨🇱',emoji:'🍗',web:'https://www.tarragona.cl'},
- {id:'juanmaestro',nombre:'Juan Maestro',tipo:'Sánguches 🇨',emoji:'',web:'https://www.juanmaestro.cl'},
+ {id:'juanmaestro',nombre:'Juan Maestro',tipo:'Sánguches 🇨',emoji:'🥪',web:'https://www.juanmaestro.cl'},
  {id:'fuentesoda',nombre:'Fuente Soda',tipo:'Clásicos 🇨🇱',emoji:'🥤',web:'https://www.fuentesoda.cl'},
- {id:'tommybeans',nombre:'Tommy Beans',tipo:'Mexicana 🇨🇱',emoji:'🌯',web:'https://www.tommybeans.cl'},
+ {id:'tommybeans',nombre:'Tommy Beans',tipo:'Mexicana 🇨',emoji:'🌯',web:'https://www.tommybeans.cl'},
  {id:'subway',nombre:'Subway',tipo:'Sándwiches',emoji:'🥖',web:'https://www.subway.com/es-CL'},
  {id:'starbucks',nombre:'Starbucks',tipo:'Café',emoji:'☕',web:'https://www.starbucks.cl'},
  {id:'dunkin',nombre:"Dunkin'",tipo:'Donuts · Café',emoji:'🍩',web:'https://www.dunkinchile.cl'},
- {id:'elkiosko',nombre:'El Kiosko',tipo:'Hamburguesas 🇨',emoji:'',web:'https://www.elkiosko.cl'}
+ {id:'elkiosko',nombre:'El Kiosko',tipo:'Hamburguesas 🇨',emoji:'🍟',web:'https://www.elkiosko.cl'}
 ];
 const BANC_DEFAULT=[
  {id:'bancochile',nombre:'Banco de Chile',tipo:'Banco',emoji:'🏦',url:'https://www.bancochile.cl'},
@@ -490,11 +493,11 @@ const APPS_SEED=[
  {id:'a3',restaurante:'kfc',canalesUso:['app'],titulo:'Balde familiar con descuento',detalle:'Cupón exclusivo en app KFC.',medioPago:'todos',dias:[5,6,0],vigencia:'Agosto 2026',fuente:'https://www.kfc.cl/app',verificado:false,tipo:'app'},
  {id:'a4',restaurante:'dominos',canalesUso:['app','web'],titulo:'Pizza mediana a $4.990',detalle:'Cupón exclusivo por la app.',medioPago:'app',dias:[1,2,3],vigencia:'Agosto 2026',fuente:'https://www.dominos.cl/app',verificado:false,tipo:'app'}
 ];
-const EMOJIS_COMIDA=['🍔','🍕','🍗','🌭','🥪','🌮','🌯','🍟','🍣','🍪','🍰','🍦','🍩','🍫','🥤','🧋','🍺','🍜','🍝','🥩','🥑','🍿','🥐','🥖','','🍽️'];
-const EMOJIS_FINANZAS=['🏦','💳','📱','💰','💵','💸','🪙','','🧰','📈','🏧','🏪','🏬','💎',''];
+const EMOJIS_COMIDA=['🍔','','🍗','','🥪','','🌯','','🍣','','🍰','','🍩','','🥤','','🍺','','🍝','','🥑','','🥐','','🫘','️'];
+const EMOJIS_FINANZAS=['🏦','💳','📱','💰','💵','💸','','🤝','','📈','','🏪','','💎','🔐'];
 const EMOJIS_CLUBES=['🎁','⭐','👑','','📡','','✈️','','🛍️','🎉','','💫'];
-const EMOJIS_APPS=['🛵','️','💙','','','🍏','','💠','🌐','🚀','🚗','✅'];
-const EMOJIS_OTROS=['🚕','📍','🗓️','','🏷️','✨','🆕',''];
+const EMOJIS_APPS=['🛵','','💙','','👛','🍏','📲','💠','🌐','🚀','🚗','✅'];
+const EMOJIS_OTROS=['🏍️','','','🗓️','','🏷️','✨','🆕'];
 
 const DIAS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const DIAS_CORTO=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
@@ -504,7 +507,9 @@ const MESES_NOMBRES=['enero','febrero','marzo','abril','mayo','junio','julio','a
 const USO_MAP={presencial:'🏪 Presencial',web:'🌐 Web',app:'📱 App',tel:'📞 Tel.'};
 const KEY='pffchile_v5';
 const OLD_KEYS=['pffchile_v4','pffchile_v3','pffchile_v2','pffchile_v1'];
+const MODELS_PREF=['gemini-2.5-flash-lite','gemini-3-flash','gemini-3-flash-preview','gemini-2.5-flash','gemini-3-pro','gemini-3-pro-preview','gemini-2.0-flash-lite','gemini-2.0-flash','gemini-1.5-flash','gemini-1.5-pro'];
 const $=s=>document.querySelector(s);
+let modeloActivo=null;
 
 function mesTexto(m){return MESES_NOMBRES[m];}
 function getMesesValidos(){
@@ -513,7 +518,6 @@ function getMesesValidos(){
  return meses;
 }
 function normalizarNombre(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();}
-/* Parsea la vigencia y devuelve la fecha final; null si no se puede interpretar */
 function parseVigencia(v){
  if(!v)return null;
  const s=normalizarNombre(String(v));
@@ -583,7 +587,7 @@ if(!state||!Array.isArray(state.promos)){
   try{const s=JSON.parse(localStorage.getItem(k));if(s&&Array.isArray(s.promos)){migrado=s;break;}}catch(e){}
  }
  if(migrado){state=migrado;avisoMigracion=true;}
- else{state={favoritos:[],bancos:[],clubes:[],appsExt:[],modo:'hoy',promos:JSON.parse(JSON.stringify(PROMOS_SEED)),promosClub:JSON.parse(JSON.stringify(CLUBS_SEED)),apps:JSON.parse(JSON.stringify(APPS_SEED)),apiKey:'',modelo:'gemini-2.0-flash',dark:false};}
+ else{state={favoritos:[],bancos:[],clubes:[],appsExt:[],modo:'hoy',promos:JSON.parse(JSON.stringify(PROMOS_SEED)),promosClub:JSON.parse(JSON.stringify(CLUBS_SEED)),apps:JSON.parse(JSON.stringify(APPS_SEED)),apiKey:'',modelo:'gemini-2.5-flash-lite',dark:false};}
 }
 if(!Array.isArray(state.listaRestaurantes))state.listaRestaurantes=JSON.parse(JSON.stringify(REST_DEFAULT));
 if(!Array.isArray(state.listaBancos))state.listaBancos=JSON.parse(JSON.stringify(BANC_DEFAULT));
@@ -596,6 +600,7 @@ if(!Array.isArray(state.apps))state.apps=JSON.parse(JSON.stringify(APPS_SEED));
 state.promos.forEach(p=>{if(!p.origen)p.origen='seed';if(!p.tipo)p.tipo='banco';if(!p.canal)p.canal='directa';if(!Array.isArray(p.canalesUso))p.canalesUso=[];if(p.appExt===undefined)p.appExt=null;});
 state.promosClub.forEach(p=>{if(!p.origen)p.origen='seed';p.tipo='club';if(!p.canal)p.canal='directa';if(!Array.isArray(p.canalesUso))p.canalesUso=[];if(p.appExt===undefined)p.appExt=null;});
 state.apps.forEach(a=>{if(!a.origen)a.origen='seed';a.tipo='app';if(!Array.isArray(a.canalesUso))a.canalesUso=[];});
+modeloActivo=state.modelo||'gemini-2.5-flash-lite';
 
 let REST_MAP={},BAN_MAP={},CLUB_MAP={},APPEXT_MAP={};
 function rebuildMapas(){
@@ -684,6 +689,368 @@ function vincularCalendario(btnId,dateId,textId){
  });
 }
 
+/* ---------- Detección de modelos ---------- */
+function esErrorDeModelo(msg){return /limit: 0|no longer available|deprecated|not found|404|does not exist/i.test(msg||'');}
+async function listarModelos(key){
+ const res=await fetch('https://generativelanguage.googleapis.com/v1beta/models?key='+encodeURIComponent(key)+'&pageSize=200');
+ if(!res.ok)throw new Error('HTTP '+res.status);
+ const data=await res.json();
+ return (data.models||[]).filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent')).map(m=>(m.name||'').replace('models/',''));
+}
+async function probarModelo(key,modelo){
+ const url=`https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent?key=${encodeURIComponent(key)}`;
+ const body={contents:[{parts:[{text:'Responde exactamente: OK'}]}],generationConfig:{maxOutputTokens:10}};
+ const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+ if(!res.ok){
+  let msg='HTTP '+res.status;
+  try{const j=await res.json();msg=j.error?.message||msg;}catch(e){}
+  throw new Error(msg);
+ }
+ return true;
+}
+async function detectarModelo(key){
+ let candidatos=MODELS_PREF.slice();
+ try{
+  const disp=await listarModelos(key);
+  if(disp.length){
+   const pref=candidatos.filter(m=>disp.includes(m));
+   const extra=disp.filter(m=>/gemini/.test(m)&&!pref.includes(m));
+   candidatos=pref.concat(extra);
+  }
+ }catch(e){}
+ for(const m of candidatos){
+  try{
+   logIA(`🔬 Probando ${m}…`);
+   await probarModelo(key,m);
+   logIA(`✅ Modelo disponible: ${m}`,'ok');
+   return m;
+  }catch(err){
+   logIA(`• ${m}: no disponible (${String(err.message).slice(0,70)})`);
+  }
+ }
+ return null;
+}
+function syncModeloSel(m){
+ const sel=$('#modeloSel');
+ if(![...sel.options].some(o=>o.value===m)){sel.add(new Option(m,m));}
+ sel.value=m;
+}
+async function cambiarModeloAutomatico(apiKey){
+ logIA('🔁 El modelo actual no tiene cuota gratuita; buscando otro…');
+ const m=await detectarModelo(apiKey);
+ if(m){
+  state.modelo=m;modeloActivo=m;guardar();syncModeloSel(m);
+  logIA(`✅ Cambiado a ${m}.`,'ok');
+  notificar('✅ Modelo cambiado',`Ahora se usa ${m}.`,'ok');
+  return true;
+ }
+ logIA('❌ Ningún modelo disponible con tu key.','err');
+ notificar('❌ Sin cuota gratuita','Ningún modelo Gemini disponible con tu key. Revisa Google AI Studio o habilita facturación.','err',10000);
+ return false;
+}
+
+function logIA(msg,tipo){
+ const color=tipo==='err'?'#b91c1c':tipo==='ok'?'#166534':'#374151';
+ $('#estadoIA').innerHTML+=`<div style="color:${color}">${msg}</div>`;
+ $('#estadoIA').scrollTop=$('#estadoIA').scrollHeight;
+}
+function delay(ms){return new Promise(r=>setTimeout(r,ms));}
+async function llamarGemini(key,modelo,prompt,conBusqueda,intentos=0){
+ const url=`https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent?key=${encodeURIComponent(key)}`;
+ const body={contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.2,responseMimeType:'application/json'}};
+ if(conBusqueda)body.tools=[{google_search:{}}];
+ const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+ if(!res.ok){
+  let msg='HTTP '+res.status;
+  try{const j=await res.json();msg=j.error?.message||msg;}catch(e){}
+  if(esErrorDeModelo(msg)){const e=new Error(msg);e.modelo=true;throw e;}
+  const cuotaReal=/429|exceeded|quota|retry/i.test(msg)&&!/limit: 0/.test(msg);
+  if(cuotaReal&&intentos<2){
+   const espera=Math.pow(2,intentos)*10000+Math.random()*3000;
+   logIA(`⏳ Cuota por minuto: reintentando en ${Math.ceil(espera/1000)}s…`);
+   await delay(espera);
+   return llamarGemini(key,modelo,prompt,conBusqueda,intentos+1);
+  }
+  throw new Error(msg);
+ }
+ const data=await res.json();
+ const txt=(data.candidates?.[0]?.content?.parts||[]).map(p=>p.text||'').join('');
+ if(!txt)throw new Error('Respuesta vacía');
+ return txt;
+}
+function extraerJSON(txt){
+ txt=txt.trim();
+ const m=txt.match(/```(?:json)?\s*([\s\S]*?)```/);
+ if(m)txt=m[1].trim();
+ const i=txt.indexOf('{'),j=txt.lastIndexOf('}');
+ if(i>=0&&j>i)txt=txt.slice(i,j+1);
+ else{
+  const ia=txt.indexOf('['),ja=txt.lastIndexOf(']');
+  if(ia>=0&&ja>ia)txt='{"promos":'+txt.slice(ia,ja+1)+'}';
+ }
+ return JSON.parse(txt);
+}
+function reglasFechaPrompt(){
+ const mv=getMesesValidos();
+ const fechaStr=new Date().toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ return {fechaStr,rango:mv.map(m=>mesTexto(m.mes)+' '+m.anio).join(', '),mes:mesTexto(mv[0].mes),anio:mv[0].anio};
+}
+const FORMATO_USOS='"canalesUso": sublista de ["presencial","web","app","telefonica"].';
+async function consultarBancoIA(b,favs,apiKey,modelo,signal){
+ const lista=favs.map(r=>r.nombre).join(', ');
+ const urls=[b.url,...favs.map(r=>r.web).filter(Boolean)].filter(Boolean);
+ const f=reglasFechaPrompt();
+ const prompt=`Eres un investigador de promociones bancarias EN CHILE.
+HOY es: ${f.fechaStr}. MESES VÁLIDOS: ${f.rango}. Mes ACTUAL: ${f.mes} de ${f.anio}.
+TAREA: buscar SOLO promociones VIGENTES publicadas en ${f.mes} de ${f.anio} (o meses siguientes indicados) del banco "${b.nombre}" (${b.tipo}, Chile) para pagar en: ${lista}.
+FUENTES OFICIALES REGISTRADAS: revisa primero estas páginas con tu búsqueda: ${urls.join(' | ')}
+Además, busca por tu cuenta en otras fuentes confiables (prensa, sitios de beneficios).
+Incluye promos directas en locales, promos vía apps de delivery (Uber Eats, Rappi, PedidosYa) y billeteras de pago.
+REGLAS: 1) RECHAZA promos con vigencia anterior a ${f.mes} ${f.anio}. 2) RECHAZA promos "finalizó/vencida/caducada". 3) Si NO menciona vigencia clara, NO la incluyas. 4) NO INVENTES. 5) Si no hay nada, {"promos":[]}.
+FORMATO JSON: {"promos":[{"restaurante":"<nombre exacto>","titulo":"<descuento>","detalle":"<condiciones; indica si es vía alguna app>","dias":"all","canalesUso":[...],"tope":"<tope>","vigencia":"<ej: ${f.mes} ${f.anio}>","fuente":"<URL exacta>"}]}
+${FORMATO_USOS}
+"dias": 0=Dom,1=Lun,2=Mar,3=Mié,4=Jue,5=Vie,6=Sáb. "all" si es todos los días.`;
+ let texto;
+ try{texto=await llamarGemini(apiKey,modelo,prompt,true);}
+ catch(e){if(signal?.aborted)throw new Error('Cancelado');if(e.modelo)throw e;texto=await llamarGemini(apiKey,modelo,prompt,false);}
+ let json;try{json=extraerJSON(texto);}catch(e){throw new Error('JSON inválido');}
+ const arr=Array.isArray(json)?json:(json.promos||json.resultados||[]);
+ const nuevas=[];let descartadas=0;const fechaConsulta=new Date();
+ for(const it of arr){
+  if(!it||typeof it!=='object')continue;
+  if(esVigenciaAntigua(it.vigencia,fechaConsulta)){descartadas++;continue;}
+  const r=matchRestaurante(it.restaurante||'',favs);if(!r)continue;
+  nuevas.push({id:'ia'+Date.now()+Math.floor(Math.random()*9999),banco:b.id,restaurante:r.id,appExt:null,canal:'directa',
+   canalesUso:normalizarUsos(it.canalesUso),
+   titulo:String(it.titulo||'Promo').slice(0,120),detalle:String(it.detalle||'').slice(0,300),
+   dias:normalizarDias(it.dias),tope:String(it.tope||'').slice(0,120),
+   vigencia:String(it.vigencia||f.mes+' '+f.anio).slice(0,80),fuente:String(it.fuente||'').slice(0,300)||b.url,
+   verificado:false,origen:'ia',fecha:new Date().toLocaleDateString('es-CL')});
+ }
+ const idsR=new Set(nuevas.map(p=>p.restaurante));
+ state.promos=state.promos.filter(p=>!(p.banco===b.id&&idsR.has(p.restaurante)&&p.origen!=='manual'&&p.canal==='directa'));
+ state.promos.push(...nuevas);
+ return {nuevas,descartadas};
+}
+async function consultarClubIA(c,favs,apiKey,modelo,signal){
+ const lista=favs.map(r=>r.nombre).join(', ');
+ const urls=[c.url,...favs.map(r=>r.web).filter(Boolean)].filter(Boolean);
+ const f=reglasFechaPrompt();
+ const prompt=`Eres un investigador de beneficios de CLUBES DE FIDELIDAD EN CHILE.
+HOY es: ${f.fechaStr}. MESES VÁLIDOS: ${f.rango}. Mes ACTUAL: ${f.mes} de ${f.anio}.
+TAREA: buscar SOLO descuentos/cupones VIGENTES del programa "${c.nombre}" (${c.tipo}, Chile).
+Los beneficios pueden ser: (a) canjeables en restaurantes: ${lista} ; o (b) aplicables en apps de delivery y billeteras de pago (Uber Eats, Rappi, PedidosYa, etc.).
+FUENTES OFICIALES REGISTRADAS: revisa primero estas páginas con tu búsqueda: ${urls.join(' | ')}
+Además, busca por tu cuenta en otras fuentes confiables.
+REGLAS: 1) RECHAZA beneficios con vigencia anterior a ${f.mes} ${f.anio}. 2) RECHAZA si dice "finalizó/vencida/caducada". 3) Si NO menciona vigencia clara, NO lo incluyas. 4) NO INVENTES. 5) Si no hay nada, {"promos":[]}.
+FORMATO JSON: {"promos":[{"restaurante":"<nombre exacto o vacío si aplica a toda la app>","aplicacion":"<nombre de la app de delivery/billetera si corresponde, o vacío>","titulo":"<beneficio>","detalle":"<cómo canjear>","dias":"all","canalesUso":[...],"tope":"<tope o requisito>","vigencia":"<ej: ${f.mes} ${f.anio}>","fuente":"<URL exacta>"}]}
+${FORMATO_USOS}
+"dias": 0=Dom,1=Lun,2=Mar,3=Mié,4=Jue,5=Vie,6=Sáb. "all" si es todos los días.`;
+ let texto;
+ try{texto=await llamarGemini(apiKey,modelo,prompt,true);}
+ catch(e){if(signal?.aborted)throw new Error('Cancelado');if(e.modelo)throw e;texto=await llamarGemini(apiKey,modelo,prompt,false);}
+ let json;try{json=extraerJSON(texto);}catch(e){throw new Error('JSON inválido');}
+ const arr=Array.isArray(json)?json:(json.promos||json.resultados||[]);
+ const nuevas=[];let descartadas=0;const fechaConsulta=new Date();
+ for(const it of arr){
+  if(!it||typeof it!=='object')continue;
+  if(esVigenciaAntigua(it.vigencia,fechaConsulta)){descartadas++;continue;}
+  const r=matchRestaurante(it.restaurante||'',favs);
+  const a=matchApp(it.aplicacion||'',state.listaAppsExt);
+  if(!r&&!a)continue;
+  const canal=a?'app':'directa';
+  nuevas.push({id:'ic'+Date.now()+Math.floor(Math.random()*9999),club:c.id,
+   restaurante:r?r.id:'',appExt:a?a.id:null,canal,tipo:'club',
+   canalesUso:normalizarUsos(it.canalesUso),
+   titulo:String(it.titulo||'Beneficio').slice(0,120),detalle:String(it.detalle||'').slice(0,300),
+   dias:normalizarDias(it.dias),tope:String(it.tope||'').slice(0,120),
+   vigencia:String(it.vigencia||f.mes+' '+f.anio).slice(0,80),fuente:String(it.fuente||'').slice(0,300)||c.url,
+   verificado:false,origen:'ia',fecha:new Date().toLocaleDateString('es-CL')});
+ }
+ state.promosClub=state.promosClub.filter(p=>{
+  if(p.club!==c.id||p.origen==='manual')return true;
+  return !nuevas.some(n=> n.canal==='app' ? (p.canal==='app'&&p.appExt===n.appExt) : (p.canal==='directa'&&p.restaurante===n.restaurante));
+ });
+ state.promosClub.push(...nuevas);
+ return {nuevas,descartadas};
+}
+async function consultarAppIA(r,apiKey,modelo,signal){
+ const urls=[r.web].filter(Boolean);
+ const f=reglasFechaPrompt();
+ const prompt=`Eres un investigador de cupones en apps de comida rápida EN CHILE.
+HOY: ${f.fechaStr}. MESES VÁLIDOS: ${f.rango}. Mes ACTUAL: ${f.mes} ${f.anio}.
+TAREA: buscar SOLO cupones VIGENTES publicados en ${f.mes} ${f.anio} disponibles EXCLUSIVAMENTE en la app móvil de "${r.nombre}" (${r.tipo}, Chile).
+FUENTES OFICIALES REGISTRADAS: revisa primero estas páginas con tu búsqueda: ${urls.join(' | ')}
+Además, busca por tu cuenta en otras fuentes confiables.
+REGLAS: 1) RECHAZA cupones con vigencia anterior a ${f.mes} ${f.anio}. 2) Si NO hay cupones vigentes, {"cupones":[]}. 3) NO INVENTES.
+FORMATO JSON: {"cupones":[{"titulo":"<ej: 2x1 Big Mac>","detalle":"<cómo canjear>","medioPago":"<todos|app|tarjetas|efectivo|webpay|otro: detalle>","dias":"all","canalesUso":[...],"vigencia":"<${f.mes} ${f.anio}>","fuente":"<url>"}]}
+${FORMATO_USOS}
+"dias": 0=Dom,1=Lun,...,6=Sáb. "all" si es todos los días.`;
+ let texto;
+ try{texto=await llamarGemini(apiKey,modelo,prompt,true);}
+ catch(e){if(signal?.aborted)throw new Error('Cancelado');if(e.modelo)throw e;texto=await llamarGemini(apiKey,modelo,prompt,false);}
+ let json;try{json=extraerJSON(texto);}catch(e){throw new Error('JSON inválido');}
+ const arr=Array.isArray(json)?json:(json.cupones||json.resultados||[]);
+ const nuevas=[];let descartadas=0;const fechaConsulta=new Date();
+ for(const it of arr){
+  if(!it||typeof it!=='object')continue;
+  if(esVigenciaAntigua(it.vigencia,fechaConsulta)){descartadas++;continue;}
+  const pago=String(it.medioPago||'todos').toLowerCase().trim();
+  const pagoNorm=['todos','app','tarjetas','efectivo','webpay'].includes(pago)?pago:('otro: '+pago);
+  nuevas.push({id:'ai'+Date.now()+Math.floor(Math.random()*9999),restaurante:r.id,tipo:'app',
+   canalesUso:normalizarUsos(it.canalesUso),
+   titulo:String(it.titulo||'Cupón').slice(0,120),detalle:String(it.detalle||'').slice(0,300),medioPago:pagoNorm,
+   dias:normalizarDias(it.dias),vigencia:String(it.vigencia||f.mes+' '+f.anio).slice(0,80),
+   fuente:String(it.fuente||'').slice(0,300)||r.web||'',verificado:false,origen:'ia',fecha:new Date().toLocaleDateString('es-CL')});
+ }
+ state.apps=state.apps.filter(a=>!(a.restaurante===r.id&&a.origen==='ia'&&nuevas.some(n=>normalizarNombre(n.titulo)===normalizarNombre(a.titulo))));
+ state.apps.push(...nuevas);
+ return {nuevas,descartadas};
+}
+function obtenerKey(){return (state.apiKey||$('#apiKeyInput').value||'').trim();}
+
+let actualizando=false,signalIA=null;
+async function actualizarConIA(){
+ if(actualizando)return;
+ const apiKey=obtenerKey();
+ if(!apiKey){logIA('⚠️ Pega tu API key.','err');notificar('Sin API key','Configúrala arriba.','err');return;}
+ if(state.favoritos.length===0||state.bancos.length===0){logIA('⚠️ Marca favoritos y bancos.','err');notificar('Faltan selecciones','Marca favoritos y bancos.','err');return;}
+ actualizando=true;signalIA={aborted:false};
+ const btn=$('#btnIA'),btnC=$('#btnCancelarIA');
+ btn.disabled=true;btnC.style.display='inline-flex';btnC.disabled=false;
+ $('#estadoIA').innerHTML='';
+ const favs=state.favoritos.map(id=>REST_MAP[id]).filter(Boolean);
+ const bancosSel=state.bancos.map(id=>BAN_MAP[id]).filter(Boolean).slice(0,10);
+ let total=0,td=0,cambioModelo=false;
+ logIA(`🤖 Revisando fuentes oficiales registradas + búsqueda propia (${reglasFechaPrompt().mes} ${reglasFechaPrompt().anio})…`);
+ notificar('🤖 Actualización iniciada','Revisando URLs oficiales y buscando en la web.','ia');
+ for(let i=0;i<bancosSel.length;i++){
+  if(signalIA.aborted){logIA('⛔ Cancelado.','');break;}
+  const b=bancosSel[i];
+  logIA(`🔎 [${i+1}/${bancosSel.length}] ${b.emoji} ${b.nombre}…`);
+  try{
+   const {nuevas,descartadas}=await consultarBancoIA(b,favs,apiKey,modeloActivo,signalIA);
+   logIA(`✅ ${b.nombre}: ${nuevas.length} promo(s)${descartadas?' · 🗑️ '+descartadas+' antigua(s)':''}.`,nuevas.length?'ok':'');
+   total+=nuevas.length;td+=descartadas;
+   if(nuevas.length>0)notificar(`🎉 ${b.nombre} · ${nuevas.length} promo(s)`,nuevas.slice(0,3).map(p=>`• ${REST_MAP[p.restaurante]?.nombre||'App'}: ${p.titulo}`).join('<br>'),'ok',6000);
+  }catch(err){
+   if(err.modelo&&!cambioModelo){
+    cambioModelo=true;
+    const ok=await cambiarModeloAutomatico(apiKey);
+    if(ok){i--;continue;}else break;
+   }
+   logIA(`❌ ${b.nombre}: ${String(err.message).slice(0,140)}`,'err');
+  }
+  guardar();renderResultados();
+  if(i<bancosSel.length-1&&!signalIA.aborted){logIA('⏳ 15s para cuota…');await delay(15000);}
+ }
+ logIA(`🏁 ${total} nuevas · ${td} antiguas descartadas.`,'ok');
+ if(total>0)notificar('✅ Completo',`${total} promos nuevas.`,'ok',6000);
+ if(td>0&&total===0)notificar('⚠️ Solo promos antiguas',`${td} vencidas descartadas.`,'warn',7000);
+ actualizando=false;btn.disabled=false;btnC.style.display='none';
+}
+$('#btnIA').addEventListener('click',actualizarConIA);
+$('#btnCancelarIA').addEventListener('click',()=>{if(signalIA)signalIA.aborted=true;$('#btnCancelarIA').disabled=true;});
+
+let actualizandoClub=false,signalIAClub=null;
+async function actualizarClubesIA(){
+ if(actualizandoClub)return;
+ const apiKey=obtenerKey();
+ if(!apiKey){logIA('⚠️ Pega tu API key.','err');notificar('Sin API key','Configúrala arriba.','err');return;}
+ if(state.favoritos.length===0||state.clubes.length===0){logIA('⚠️ Marca favoritos y clubes.','err');notificar('Faltan selecciones','Marca favoritos y clubes.','err');return;}
+ actualizandoClub=true;signalIAClub={aborted:false};
+ const btn=$('#btnIAClub'),btnC=$('#btnCancelarIAClub');
+ btn.disabled=true;btnC.style.display='inline-flex';btnC.disabled=false;
+ $('#estadoIA').innerHTML='';
+ const favs=state.favoritos.map(id=>REST_MAP[id]).filter(Boolean);
+ const clubesSel=state.clubes.map(id=>CLUB_MAP[id]).filter(Boolean).slice(0,10);
+ let total=0,td=0,cambioModelo=false;
+ logIA('🎁 Revisando fuentes oficiales de clubes (restaurantes y apps) + búsqueda propia…');
+ notificar('🎁 Clubes de fidelidad','Revisando URLs oficiales y buscando.','club');
+ for(let i=0;i<clubesSel.length;i++){
+  if(signalIAClub.aborted){logIA('⛔ Cancelado.','');break;}
+  const c=clubesSel[i];
+  logIA(`🎁 [${i+1}/${clubesSel.length}] ${c.emoji} ${c.nombre}…`);
+  try{
+   const {nuevas,descartadas}=await consultarClubIA(c,favs,apiKey,modeloActivo,signalIAClub);
+   logIA(`✅ ${c.nombre}: ${nuevas.length} beneficio(s)${descartadas?' · 🗑️ '+descartadas+' antiguos':''}.`,nuevas.length?'ok':'');
+   total+=nuevas.length;td+=descartadas;
+   if(nuevas.length>0)notificar(`🎁 ${c.nombre} · ${nuevas.length} beneficio(s)`,nuevas.slice(0,3).map(p=>`• ${(p.appExt?APPEXT_MAP[p.appExt]?.nombre:REST_MAP[p.restaurante]?.nombre)||'App'}: ${p.titulo}`).join('<br>'),'club',6000);
+  }catch(err){
+   if(err.modelo&&!cambioModelo){
+    cambioModelo=true;
+    const ok=await cambiarModeloAutomatico(apiKey);
+    if(ok){i--;continue;}else break;
+   }
+   logIA(`❌ ${c.nombre}: ${String(err.message).slice(0,140)}`,'err');
+  }
+  guardar();renderResultados();
+  if(i<clubesSel.length-1&&!signalIAClub.aborted){logIA('⏳ 15s…');await delay(15000);}
+ }
+ logIA(`🏁 ${total} nuevos · ${td} antiguos descartados.`,'ok');
+ actualizandoClub=false;btn.disabled=false;btnC.style.display='none';
+}
+$('#btnIAClub').addEventListener('click',actualizarClubesIA);
+$('#btnCancelarIAClub').addEventListener('click',()=>{if(signalIAClub)signalIAClub.aborted=true;$('#btnCancelarIAClub').disabled=true;});
+
+let actualizandoApp=false,signalIAApp=null;
+async function actualizarAppsIA(){
+ if(actualizandoApp)return;
+ const apiKey=obtenerKey();
+ if(!apiKey){logIA('⚠️ Pega tu API key.','err');notificar('Sin API key','Configúrala arriba.','err');return;}
+ if(state.favoritos.length===0){logIA('⚠️ Marca favoritos.','err');notificar('Faltan favoritos','Marca restaurantes primero.','err');return;}
+ actualizandoApp=true;signalIAApp={aborted:false};
+ const btn=$('#btnIAApp'),btnC=$('#btnCancelarIAApp');
+ btn.disabled=true;btnC.style.display='inline-flex';btnC.disabled=false;
+ $('#estadoIA').innerHTML='';
+ const favs=state.favoritos.map(id=>REST_MAP[id]).filter(Boolean).slice(0,10);
+ let total=0,td=0,cambioModelo=false;
+ logIA('📱 Revisando fuentes oficiales de apps + búsqueda propia…');
+ for(let i=0;i<favs.length;i++){
+  if(signalIAApp.aborted){logIA('⛔ Cancelado.','');break;}
+  const r=favs[i];
+  logIA(`📱 [${i+1}/${favs.length}] ${r.emoji} ${r.nombre}…`);
+  try{
+   const {nuevas,descartadas}=await consultarAppIA(r,apiKey,modeloActivo,signalIAApp);
+   logIA(`✅ ${r.nombre}: ${nuevas.length} cupón(es)${descartadas?' · 🗑️ '+descartadas+' antiguos':''}.`,nuevas.length?'ok':'');
+   total+=nuevas.length;td+=descartadas;
+   if(nuevas.length>0)notificar(`📱 ${r.nombre} · ${nuevas.length} cupón(es)`,nuevas.slice(0,3).map(p=>`• ${p.titulo} (${pagoTexto(p.medioPago)})`).join('<br>'),'app',6000);
+  }catch(err){
+   if(err.modelo&&!cambioModelo){
+    cambioModelo=true;
+    const ok=await cambiarModeloAutomatico(apiKey);
+    if(ok){i--;continue;}else break;
+   }
+   logIA(`❌ ${r.nombre}: ${String(err.message).slice(0,140)}`,'err');
+  }
+  guardar();renderResultados();
+  if(i<favs.length-1&&!signalIAApp.aborted){logIA('⏳ 15s…');await delay(15000);}
+ }
+ logIA(`🏁 ${total} nuevos · ${td} antiguos descartados.`,'ok');
+ actualizandoApp=false;btn.disabled=false;btnC.style.display='none';
+}
+$('#btnIAApp').addEventListener('click',actualizarAppsIA);
+$('#btnCancelarIAApp').addEventListener('click',()=>{if(signalIAApp)signalIAApp.aborted=true;$('#btnCancelarIAApp').disabled=true;});
+$('#btnGuardarKey').addEventListener('click',()=>{
+ state.apiKey=$('#apiKeyInput').value.trim();
+ state.modelo=$('#modeloSel').value;modeloActivo=state.modelo;guardar();
+ logIA(state.apiKey?'🔑 API key guardada.':'🗑️ API key eliminada.','ok');
+});
+$('#btnDetectar').addEventListener('click',async()=>{
+ const key=obtenerKey();
+ if(!key){alert('Pega tu API key primero.');return;}
+ $('#estadoIA').innerHTML='';
+ logIA('🔬 Detectando modelos disponibles para tu key…');
+ const m=await detectarModelo(key);
+ if(m){
+  state.modelo=m;modeloActivo=m;guardar();syncModeloSel(m);
+  notificar('✅ Modelo listo',`Se usará ${m} para las búsquedas.`,'ok',6000);
+ }else{
+  notificar('❌ Sin modelos disponibles','Tu key no tiene cuota gratuita en ningún modelo. Revisa Google AI Studio o habilita facturación.','err',10000);
+ }
+});
+
+/* ---------- Render ---------- */
 function renderRestaurantes(){
  $('#cFav').textContent=state.favoritos.length;
  $('#restaurantes').innerHTML=state.listaRestaurantes.map(r=>{
@@ -746,7 +1113,7 @@ function promoCardBanco(p,hoy){
   ${p.tope?`<div class="meta">📌 ${p.tope}</div>`:''}
   ${p.vigencia?`<div class="meta">🕓 Vigencia: ${p.vigencia}</div>`:''}
   ${avisoVencida(p)}
-  ${p.fuente?`<a class="fuente" href="${p.fuente}" target="_blank" rel="noopener">🔗 Fuente ↗</a>`:''}
+  ${p.fuente?`<a class="fuente" href="${p.fuente}" target="_blank" rel="noopener">🔗 Fuente </a>`:''}
   <div class="acciones">
    <a class="btn btn-mini btn-gris" href="${urlBusqueda(p.banco,p.restaurante,p.appExt)}" target="_blank" rel="noopener">🔍</a>
    <button class="btn btn-mini ${p.verificado?'btn-gris':'btn-verde'}" data-acc="verif" data-id="${p.id}" data-grupo="promos">${p.verificado?'↩':'✔ Verif.'}</button>
@@ -768,7 +1135,7 @@ function promoCardClub(p,hoy){
   ${p.tope?`<div class="meta">📌 ${p.tope}</div>`:''}
   ${p.vigencia?`<div class="meta">🕓 Vigencia: ${p.vigencia}</div>`:''}
   ${avisoVencida(p)}
-  ${p.fuente?`<a class="fuente" href="${p.fuente}" target="_blank" rel="noopener">🔗 Fuente ↗</a>`:''}
+  ${p.fuente?`<a class="fuente" href="${p.fuente}" target="_blank" rel="noopener">🔗 Fuente </a>`:''}
   <div class="acciones">
    <a class="btn btn-mini btn-gris" href="${urlBusquedaClub(p.club,p.restaurante,p.appExt)}" target="_blank" rel="noopener">🔍</a>
    <button class="btn btn-mini ${p.verificado?'btn-gris':'btn-verde'}" data-acc="verif" data-id="${p.id}" data-grupo="clubs">${p.verificado?'↩':'✔ Verif.'}</button>
@@ -838,7 +1205,7 @@ function renderResultados(){
   });
   lista.sort((a,b)=>(b.verificado-a.verificado));
   $('#cPromosClub').textContent=lista.length;
-  contC.innerHTML=lista.length===0?'<div class="vacio">😕 Sin promos de clubes. Usa 🤖 o .</div>':`<div class="grid-promos">${lista.map(p=>promoCardClub(p,hoy)).join('')}</div>`;
+  contC.innerHTML=lista.length===0?'<div class="vacio">😕 Sin promos de clubes. Usa 🤖 o ➕.</div>':`<div class="grid-promos">${lista.map(p=>promoCardClub(p,hoy)).join('')}</div>`;
  }
  const contA=$('#resultadosApp');
  let listaApp=state.apps.filter(a=>{
@@ -849,10 +1216,11 @@ function renderResultados(){
  listaApp.sort((a,b)=>(b.verificado-a.verificado));
  $('#cApps').textContent=listaApp.length;
  if(state.favoritos.length===0)contA.innerHTML='<div class="vacio">👆 Marca tus favoritos.</div>';
- else contA.innerHTML=listaApp.length===0?'<div class="vacio">😕 Sin cupones. Usa 🤖 o ➕.</div>':`<div class="grid-promos">${listaApp.map(a=>promoCardApp(a,hoy)).join('')}</div>`;
+ else contA.innerHTML=listaApp.length===0?'<div class="vacio">😕 Sin cupones. Usa 🤖 o .</div>':`<div class="grid-promos">${listaApp.map(a=>promoCardApp(a,hoy)).join('')}</div>`;
 }
 function renderTodo(){renderRestaurantes();renderBancos();renderClubes();renderAppsExt();renderModos();renderResultados();}
 
+/* ---------- Eventos de selección ---------- */
 $('#restaurantes').addEventListener('click',e=>{
  const del=e.target.closest('.borrar-item');
  if(del){eliminarEntidad('rest',del.dataset.del);return;}
@@ -910,6 +1278,7 @@ document.body.addEventListener('click',e=>{
  }
 });
 
+/* ---------- Entidades ---------- */
 let entidadTipo=null,editandoEntidad=null;
 function renderEmojiPicker(){
  $('#emojiPicker').innerHTML=
@@ -1006,271 +1375,7 @@ function eliminarEntidad(tipo,id){
  guardar();rebuildMapas();renderTodo();
 }
 
-function logIA(msg,tipo){
- const color=tipo==='err'?'#b91c1c':tipo==='ok'?'#166534':'#374151';
- $('#estadoIA').innerHTML+=`<div style="color:${color}">${msg}</div>`;
- $('#estadoIA').scrollTop=$('#estadoIA').scrollHeight;
-}
-function delay(ms){return new Promise(r=>setTimeout(r,ms));}
-async function llamarGemini(key,modelo,prompt,conBusqueda,intentos=0){
- const url=`https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent?key=${encodeURIComponent(key)}`;
- const body={contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.2,responseMimeType:'application/json'}};
- if(conBusqueda)body.tools=[{google_search:{}}];
- const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
- if(!res.ok){
-  let msg='HTTP '+res.status;
-  try{const j=await res.json();msg=j.error?.message||msg;}catch(e){}
-  if((msg.includes('exceeded')||msg.includes('quota')||res.status===429)&&intentos<3){
-   const espera=Math.pow(2,intentos)*15000+Math.random()*5000;
-   logIA(`⏳ Reintentando en ${Math.ceil(espera/1000)}s…`);
-   await delay(espera);
-   return llamarGemini(key,modelo,prompt,conBusqueda,intentos+1);
-  }
-  throw new Error(msg);
- }
- const data=await res.json();
- const txt=(data.candidates?.[0]?.content?.parts||[]).map(p=>p.text||'').join('');
- if(!txt)throw new Error('Respuesta vacía');
- return txt;
-}
-function extraerJSON(txt){
- txt=txt.trim();
- const m=txt.match(/```(?:json)?\s*([\s\S]*?)```/);
- if(m)txt=m[1].trim();
- const i=txt.indexOf('{'),j=txt.lastIndexOf('}');
- if(i>=0&&j>i)txt=txt.slice(i,j+1);
- else{
-  const ia=txt.indexOf('['),ja=txt.lastIndexOf(']');
-  if(ia>=0&&ja>ia)txt='{"promos":'+txt.slice(ia,ja+1)+'}';
- }
- return JSON.parse(txt);
-}
-function reglasFechaPrompt(){
- const mv=getMesesValidos();
- const fechaStr=new Date().toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
- return {fechaStr,rango:mv.map(m=>mesTexto(m.mes)+' '+m.anio).join(', '),mes:mesTexto(mv[0].mes),anio:mv[0].anio};
-}
-const FORMATO_USOS='"canalesUso": sublista de ["presencial","web","app","telefonica"].';
-async function consultarBancoIA(b,favs,apiKey,modelo,signal){
- const lista=favs.map(r=>r.nombre).join(', ');
- const urls=[b.url,...favs.map(r=>r.web).filter(Boolean)].filter(Boolean);
- const f=reglasFechaPrompt();
- const prompt=`Eres un investigador de promociones bancarias EN CHILE.
-HOY es: ${f.fechaStr}. MESES VÁLIDOS: ${f.rango}. Mes ACTUAL: ${f.mes} de ${f.anio}.
-TAREA: buscar SOLO promociones VIGENTES publicadas en ${f.mes} de ${f.anio} (o meses siguientes indicados) del banco "${b.nombre}" (${b.tipo}, Chile) para pagar en: ${lista}.
-FUENTES OFICIALES REGISTRADAS: revisa primero estas páginas con tu búsqueda: ${urls.join(' | ')}
-Además, busca por tu cuenta en otras fuentes confiables (prensa, sitios de beneficios).
-Incluye promos directas en locales, promos vía apps de delivery (Uber Eats, Rappi, PedidosYa) y billeteras de pago.
-REGLAS: 1) RECHAZA promos con vigencia anterior a ${f.mes} ${f.anio}. 2) RECHAZA promos "finalizó/vencida/caducada". 3) Si NO menciona vigencia clara, NO la incluyas. 4) NO INVENTES. 5) Si no hay nada, {"promos":[]}.
-FORMATO JSON: {"promos":[{"restaurante":"<nombre exacto>","titulo":"<descuento>","detalle":"<condiciones; indica si es vía alguna app>","dias":"all","canalesUso":[...],"tope":"<tope>","vigencia":"<ej: ${f.mes} ${f.anio}>","fuente":"<URL exacta>"}]}
-${FORMATO_USOS}
-"dias": 0=Dom,1=Lun,2=Mar,3=Mié,4=Jue,5=Vie,6=Sáb. "all" si es todos los días.`;
- let texto;
- try{texto=await llamarGemini(apiKey,modelo,prompt,true);}
- catch(e){if(signal?.aborted)throw new Error('Cancelado');texto=await llamarGemini(apiKey,modelo,prompt,false);}
- let json;try{json=extraerJSON(texto);}catch(e){throw new Error('JSON inválido');}
- const arr=Array.isArray(json)?json:(json.promos||json.resultados||[]);
- const nuevas=[];let descartadas=0;const fechaConsulta=new Date();
- for(const it of arr){
-  if(!it||typeof it!=='object')continue;
-  if(esVigenciaAntigua(it.vigencia,fechaConsulta)){descartadas++;continue;}
-  const r=matchRestaurante(it.restaurante||'',favs);if(!r)continue;
-  nuevas.push({id:'ia'+Date.now()+Math.floor(Math.random()*9999),banco:b.id,restaurante:r.id,appExt:null,canal:'directa',
-   canalesUso:normalizarUsos(it.canalesUso),
-   titulo:String(it.titulo||'Promo').slice(0,120),detalle:String(it.detalle||'').slice(0,300),
-   dias:normalizarDias(it.dias),tope:String(it.tope||'').slice(0,120),
-   vigencia:String(it.vigencia||f.mes+' '+f.anio).slice(0,80),fuente:String(it.fuente||'').slice(0,300)||b.url,
-   verificado:false,origen:'ia',fecha:new Date().toLocaleDateString('es-CL')});
- }
- const idsR=new Set(nuevas.map(p=>p.restaurante));
- state.promos=state.promos.filter(p=>!(p.banco===b.id&&idsR.has(p.restaurante)&&p.origen!=='manual'&&p.canal==='directa'));
- state.promos.push(...nuevas);
- return {nuevas,descartadas};
-}
-async function consultarClubIA(c,favs,apiKey,modelo,signal){
- const lista=favs.map(r=>r.nombre).join(', ');
- const urls=[c.url,...favs.map(r=>r.web).filter(Boolean)].filter(Boolean);
- const f=reglasFechaPrompt();
- const prompt=`Eres un investigador de beneficios de CLUBES DE FIDELIDAD EN CHILE.
-HOY es: ${f.fechaStr}. MESES VÁLIDOS: ${f.rango}. Mes ACTUAL: ${f.mes} de ${f.anio}.
-TAREA: buscar SOLO descuentos/cupones VIGENTES del programa "${c.nombre}" (${c.tipo}, Chile).
-Los beneficios pueden ser: (a) canjeables en restaurantes: ${lista} ; o (b) aplicables en apps de delivery y billeteras de pago (Uber Eats, Rappi, PedidosYa, etc.).
-FUENTES OFICIALES REGISTRADAS: revisa primero estas páginas con tu búsqueda: ${urls.join(' | ')}
-Además, busca por tu cuenta en otras fuentes confiables.
-REGLAS: 1) RECHAZA beneficios con vigencia anterior a ${f.mes} ${f.anio}. 2) RECHAZA si dice "finalizó/vencida/caducada". 3) Si NO menciona vigencia clara, NO lo incluyas. 4) NO INVENTES. 5) Si no hay nada, {"promos":[]}.
-FORMATO JSON: {"promos":[{"restaurante":"<nombre exacto o vacío si aplica a toda la app>","aplicacion":"<nombre de la app de delivery/billetera si corresponde, o vacío>","titulo":"<beneficio>","detalle":"<cómo canjear>","dias":"all","canalesUso":[...],"tope":"<tope o requisito>","vigencia":"<ej: ${f.mes} ${f.anio}>","fuente":"<URL exacta>"}]}
-${FORMATO_USOS}
-"dias": 0=Dom,1=Lun,2=Mar,3=Mié,4=Jue,5=Vie,6=Sáb. "all" si es todos los días.`;
- let texto;
- try{texto=await llamarGemini(apiKey,modelo,prompt,true);}
- catch(e){if(signal?.aborted)throw new Error('Cancelado');texto=await llamarGemini(apiKey,modelo,prompt,false);}
- let json;try{json=extraerJSON(texto);}catch(e){throw new Error('JSON inválido');}
- const arr=Array.isArray(json)?json:(json.promos||json.resultados||[]);
- const nuevas=[];let descartadas=0;const fechaConsulta=new Date();
- for(const it of arr){
-  if(!it||typeof it!=='object')continue;
-  if(esVigenciaAntigua(it.vigencia,fechaConsulta)){descartadas++;continue;}
-  const r=matchRestaurante(it.restaurante||'',favs);
-  const a=matchApp(it.aplicacion||'',state.listaAppsExt);
-  if(!r&&!a)continue;
-  const canal=a?'app':'directa';
-  nuevas.push({id:'ic'+Date.now()+Math.floor(Math.random()*9999),club:c.id,
-   restaurante:r?r.id:'',appExt:a?a.id:null,canal,tipo:'club',
-   canalesUso:normalizarUsos(it.canalesUso),
-   titulo:String(it.titulo||'Beneficio').slice(0,120),detalle:String(it.detalle||'').slice(0,300),
-   dias:normalizarDias(it.dias),tope:String(it.tope||'').slice(0,120),
-   vigencia:String(it.vigencia||f.mes+' '+f.anio).slice(0,80),fuente:String(it.fuente||'').slice(0,300)||c.url,
-   verificado:false,origen:'ia',fecha:new Date().toLocaleDateString('es-CL')});
- }
- state.promosClub=state.promosClub.filter(p=>{
-  if(p.club!==c.id||p.origen==='manual')return true;
-  return !nuevas.some(n=> n.canal==='app' ? (p.canal==='app'&&p.appExt===n.appExt) : (p.canal==='directa'&&p.restaurante===n.restaurante));
- });
- state.promosClub.push(...nuevas);
- return {nuevas,descartadas};
-}
-async function consultarAppIA(r,apiKey,modelo,signal){
- const urls=[r.web].filter(Boolean);
- const f=reglasFechaPrompt();
- const prompt=`Eres un investigador de cupones en apps de comida rápida EN CHILE.
-HOY: ${f.fechaStr}. MESES VÁLIDOS: ${f.rango}. Mes ACTUAL: ${f.mes} ${f.anio}.
-TAREA: buscar SOLO cupones VIGENTES publicados en ${f.mes} ${f.anio} disponibles EXCLUSIVAMENTE en la app móvil de "${r.nombre}" (${r.tipo}, Chile).
-FUENTES OFICIALES REGISTRADAS: revisa primero estas páginas con tu búsqueda: ${urls.join(' | ')}
-Además, busca por tu cuenta en otras fuentes confiables.
-REGLAS: 1) RECHAZA cupones con vigencia anterior a ${f.mes} ${f.anio}. 2) Si NO hay cupones vigentes, {"cupones":[]}. 3) NO INVENTES.
-FORMATO JSON: {"cupones":[{"titulo":"<ej: 2x1 Big Mac>","detalle":"<cómo canjear>","medioPago":"<todos|app|tarjetas|efectivo|webpay|otro: detalle>","dias":"all","canalesUso":[...],"vigencia":"<${f.mes} ${f.anio}>","fuente":"<url>"}]}
-${FORMATO_USOS}
-"dias": 0=Dom,1=Lun,...,6=Sáb. "all" si es todos los días.`;
- let texto;
- try{texto=await llamarGemini(apiKey,modelo,prompt,true);}
- catch(e){if(signal?.aborted)throw new Error('Cancelado');texto=await llamarGemini(apiKey,modelo,prompt,false);}
- let json;try{json=extraerJSON(texto);}catch(e){throw new Error('JSON inválido');}
- const arr=Array.isArray(json)?json:(json.cupones||json.resultados||[]);
- const nuevas=[];let descartadas=0;const fechaConsulta=new Date();
- for(const it of arr){
-  if(!it||typeof it!=='object')continue;
-  if(esVigenciaAntigua(it.vigencia,fechaConsulta)){descartadas++;continue;}
-  const pago=String(it.medioPago||'todos').toLowerCase().trim();
-  const pagoNorm=['todos','app','tarjetas','efectivo','webpay'].includes(pago)?pago:('otro: '+pago);
-  nuevas.push({id:'ai'+Date.now()+Math.floor(Math.random()*9999),restaurante:r.id,tipo:'app',
-   canalesUso:normalizarUsos(it.canalesUso),
-   titulo:String(it.titulo||'Cupón').slice(0,120),detalle:String(it.detalle||'').slice(0,300),medioPago:pagoNorm,
-   dias:normalizarDias(it.dias),vigencia:String(it.vigencia||f.mes+' '+f.anio).slice(0,80),
-   fuente:String(it.fuente||'').slice(0,300)||r.web||'',verificado:false,origen:'ia',fecha:new Date().toLocaleDateString('es-CL')});
- }
- state.apps=state.apps.filter(a=>!(a.restaurante===r.id&&a.origen==='ia'&&nuevas.some(n=>normalizarNombre(n.titulo)===normalizarNombre(a.titulo))));
- state.apps.push(...nuevas);
- return {nuevas,descartadas};
-}
-function obtenerKey(){return (state.apiKey||$('#apiKeyInput').value||'').trim();}
-
-let actualizando=false,signalIA=null;
-async function actualizarConIA(){
- if(actualizando)return;
- const apiKey=obtenerKey();
- if(!apiKey){logIA('⚠️ Pega tu API key.','err');notificar('Sin API key','Configúrala arriba.','err');return;}
- if(state.favoritos.length===0||state.bancos.length===0){logIA('⚠️ Marca favoritos y bancos.','err');notificar('Faltan selecciones','Marca favoritos y bancos.','err');return;}
- actualizando=true;signalIA={aborted:false};
- const btn=$('#btnIA'),btnC=$('#btnCancelarIA');
- btn.disabled=true;btnC.style.display='inline-flex';btnC.disabled=false;
- $('#estadoIA').innerHTML='';
- const favs=state.favoritos.map(id=>REST_MAP[id]).filter(Boolean);
- const bancosSel=state.bancos.map(id=>BAN_MAP[id]).filter(Boolean).slice(0,10);
- let total=0,td=0;
- logIA(`🤖 Revisando fuentes oficiales registradas + búsqueda propia (${reglasFechaPrompt().mes} ${reglasFechaPrompt().anio})…`);
- notificar('🤖 Actualización iniciada','Revisando URLs oficiales y buscando en la web.','ia');
- for(let i=0;i<bancosSel.length;i++){
-  if(signalIA.aborted){logIA('⛔ Cancelado.','');break;}
-  const b=bancosSel[i];
-  logIA(`🔎 [${i+1}/${bancosSel.length}] ${b.emoji} ${b.nombre}…`);
-  try{
-   const {nuevas,descartadas}=await consultarBancoIA(b,favs,apiKey,state.modelo||'gemini-2.0-flash',signalIA);
-   logIA(`✅ ${b.nombre}: ${nuevas.length} promo(s)${descartadas?' · 🗑️ '+descartadas+' antigua(s)':''}.`,nuevas.length?'ok':'');
-   total+=nuevas.length;td+=descartadas;
-   if(nuevas.length>0)notificar(`🎉 ${b.nombre} · ${nuevas.length} promo(s)`,nuevas.slice(0,3).map(p=>`• ${REST_MAP[p.restaurante]?.nombre||'App'}: ${p.titulo}`).join('<br>'),'ok',6000);
-  }catch(err){logIA(`❌ ${b.nombre}: ${err.message}`,'err');}
-  guardar();renderResultados();
-  if(i<bancosSel.length-1&&!signalIA.aborted){logIA('⏳ 15s para cuota…');await delay(15000);}
- }
- logIA(`🏁 ${total} nuevas · ${td} antiguas descartadas.`,'ok');
- if(total>0)notificar('✅ Completo',`${total} promos nuevas.`,'ok',6000);
- if(td>0&&total===0)notificar('⚠️ Solo promos antiguas',`${td} vencidas descartadas.`,'warn',7000);
- actualizando=false;btn.disabled=false;btnC.style.display='none';
-}
-$('#btnIA').addEventListener('click',actualizarConIA);
-$('#btnCancelarIA').addEventListener('click',()=>{if(signalIA)signalIA.aborted=true;$('#btnCancelarIA').disabled=true;});
-
-let actualizandoClub=false,signalIAClub=null;
-async function actualizarClubesIA(){
- if(actualizandoClub)return;
- const apiKey=obtenerKey();
- if(!apiKey){logIA('⚠️ Pega tu API key.','err');notificar('Sin API key','Configúrala arriba.','err');return;}
- if(state.favoritos.length===0||state.clubes.length===0){logIA('⚠️ Marca favoritos y clubes.','err');notificar('Faltan selecciones','Marca favoritos y clubes.','err');return;}
- actualizandoClub=true;signalIAClub={aborted:false};
- const btn=$('#btnIAClub'),btnC=$('#btnCancelarIAClub');
- btn.disabled=true;btnC.style.display='inline-flex';btnC.disabled=false;
- $('#estadoIA').innerHTML='';
- const favs=state.favoritos.map(id=>REST_MAP[id]).filter(Boolean);
- const clubesSel=state.clubes.map(id=>CLUB_MAP[id]).filter(Boolean).slice(0,10);
- let total=0,td=0;
- logIA('🎁 Revisando fuentes oficiales de clubes (restaurantes y apps) + búsqueda propia…');
- notificar('🎁 Clubes de fidelidad','Revisando URLs oficiales y buscando.','club');
- for(let i=0;i<clubesSel.length;i++){
-  if(signalIAClub.aborted){logIA('⛔ Cancelado.','');break;}
-  const c=clubesSel[i];
-  logIA(`🎁 [${i+1}/${clubesSel.length}] ${c.emoji} ${c.nombre}…`);
-  try{
-   const {nuevas,descartadas}=await consultarClubIA(c,favs,apiKey,state.modelo||'gemini-2.0-flash',signalIAClub);
-   logIA(`✅ ${c.nombre}: ${nuevas.length} beneficio(s)${descartadas?' · 🗑️ '+descartadas+' antiguos':''}.`,nuevas.length?'ok':'');
-   total+=nuevas.length;td+=descartadas;
-   if(nuevas.length>0)notificar(`🎁 ${c.nombre} · ${nuevas.length} beneficio(s)`,nuevas.slice(0,3).map(p=>`• ${(p.appExt?APPEXT_MAP[p.appExt]?.nombre:REST_MAP[p.restaurante]?.nombre)||'App'}: ${p.titulo}`).join('<br>'),'club',6000);
-  }catch(err){logIA(`❌ ${c.nombre}: ${err.message}`,'err');}
-  guardar();renderResultados();
-  if(i<clubesSel.length-1&&!signalIAClub.aborted){logIA('⏳ 15s…');await delay(15000);}
- }
- logIA(`🏁 ${total} nuevos · ${td} antiguos descartados.`,'ok');
- actualizandoClub=false;btn.disabled=false;btnC.style.display='none';
-}
-$('#btnIAClub').addEventListener('click',actualizarClubesIA);
-$('#btnCancelarIAClub').addEventListener('click',()=>{if(signalIAClub)signalIAClub.aborted=true;$('#btnCancelarIAClub').disabled=true;});
-
-let actualizandoApp=false,signalIAApp=null;
-async function actualizarAppsIA(){
- if(actualizandoApp)return;
- const apiKey=obtenerKey();
- if(!apiKey){logIA('⚠️ Pega tu API key.','err');notificar('Sin API key','Configúrala arriba.','err');return;}
- if(state.favoritos.length===0){logIA('⚠️ Marca favoritos.','err');notificar('Faltan favoritos','Marca restaurantes primero.','err');return;}
- actualizandoApp=true;signalIAApp={aborted:false};
- const btn=$('#btnIAApp'),btnC=$('#btnCancelarIAApp');
- btn.disabled=true;btnC.style.display='inline-flex';btnC.disabled=false;
- $('#estadoIA').innerHTML='';
- const favs=state.favoritos.map(id=>REST_MAP[id]).filter(Boolean).slice(0,10);
- let total=0,td=0;
- logIA('📱 Revisando fuentes oficiales de apps + búsqueda propia…');
- for(let i=0;i<favs.length;i++){
-  if(signalIAApp.aborted){logIA('⛔ Cancelado.','');break;}
-  const r=favs[i];
-  logIA(`📱 [${i+1}/${favs.length}] ${r.emoji} ${r.nombre}…`);
-  try{
-   const {nuevas,descartadas}=await consultarAppIA(r,apiKey,state.modelo||'gemini-2.0-flash',signalIAApp);
-   logIA(`✅ ${r.nombre}: ${nuevas.length} cupón(es)${descartadas?' · 🗑️ '+descartadas+' antiguos':''}.`,nuevas.length?'ok':'');
-   total+=nuevas.length;td+=descartadas;
-   if(nuevas.length>0)notificar(`📱 ${r.nombre} · ${nuevas.length} cupón(es)`,nuevas.slice(0,3).map(p=>`• ${p.titulo} (${pagoTexto(p.medioPago)})`).join('<br>'),'app',6000);
-  }catch(err){logIA(`❌ ${r.nombre}: ${err.message}`,'err');}
-  guardar();renderResultados();
-  if(i<favs.length-1&&!signalIAApp.aborted){logIA('⏳ 15s…');await delay(15000);}
- }
- logIA(`🏁 ${total} nuevos · ${td} antiguos descartados.`,'ok');
- actualizandoApp=false;btn.disabled=false;btnC.style.display='none';
-}
-$('#btnIAApp').addEventListener('click',actualizarAppsIA);
-$('#btnCancelarIAApp').addEventListener('click',()=>{if(signalIAApp)signalIAApp.aborted=true;$('#btnCancelarIAApp').disabled=true;});
-$('#btnGuardarKey').addEventListener('click',()=>{
- state.apiKey=$('#apiKeyInput').value.trim();
- state.modelo=$('#modeloSel').value;guardar();
- logIA(state.apiKey?'🔑 API key guardada.':'🗑️ API key eliminada.','ok');
-});
-
+/* ---------- Búsqueda manual ---------- */
 function abrirBusqueda(){
  const cont=$('#listaBusqueda');
  if(state.favoritos.length===0){cont.innerHTML='<div class="vacio">Marca favoritos primero.</div>';}
@@ -1323,6 +1428,7 @@ $('#btnBuscarOnline').addEventListener('click',abrirBusqueda);
 $('#btnCerrarBusqueda').addEventListener('click',()=>$('#overlayBusqueda').classList.remove('abierto'));
 $('#overlayBusqueda').addEventListener('click',e=>{if(e.target.id==='overlayBusqueda')e.target.classList.remove('abierto');});
 
+/* ---------- Modales de promos ---------- */
 let editando=null,canalActual='directa';
 function llenarSelects(){
  $('#fBanco').innerHTML=state.listaBancos.map(b=>`<option value="${b.id}">${b.emoji} ${b.nombre}</option>`).join('');
@@ -1388,7 +1494,6 @@ $('#formPromo').addEventListener('submit',e=>{
  guardar();rebuildMapas();cerrarModal();renderTodo();
 });
 
-/* ---------- Modal club con canal ---------- */
 let editandoClub=null,canalClubActual='directa';
 function setCanalClub(c){
  canalClubActual=c;
@@ -1475,6 +1580,7 @@ $('#formApp').addEventListener('submit',e=>{
  guardar();cerrarModalApp();renderResultados();
 });
 
+/* ---------- PDF ---------- */
 $('#btnExportarPDF').addEventListener('click',()=>{
  const {jsPDF}=window.jspdf;
  const doc=new jsPDF();
@@ -1593,6 +1699,7 @@ $('#btnExportarPDF').addEventListener('click',()=>{
  notificar('📄 PDF descargado',`${promosBanco.length} bancarias · ${promosAppRest.length} apps · ${clubsFiltro.length} clubes · ${appsFiltro.length} cupones`,'ok');
 });
 
+/* ---------- Respaldo ---------- */
 $('#btnBackup').addEventListener('click',()=>{
  const data=JSON.stringify(state,null,2);
  const blob=new Blob([data],{type:'application/json'});
@@ -1623,9 +1730,10 @@ $('#fileImportar').addEventListener('change',e=>{
    state.promos.forEach(p=>{if(!p.origen)p.origen='seed';if(!p.tipo)p.tipo='banco';if(!p.canal)p.canal='directa';if(!Array.isArray(p.canalesUso))p.canalesUso=[];if(p.appExt===undefined)p.appExt=null;});
    state.promosClub.forEach(p=>{if(!p.origen)p.origen='seed';p.tipo='club';if(!p.canal)p.canal='directa';if(!Array.isArray(p.canalesUso))p.canalesUso=[];if(p.appExt===undefined)p.appExt=null;});
    state.apps.forEach(a=>{if(!a.origen)a.origen='seed';a.tipo='app';if(!Array.isArray(a.canalesUso))a.canalesUso=[];});
+   modeloActivo=state.modelo||'gemini-2.5-flash-lite';
    guardar();rebuildMapas();renderTodo();
    $('#apiKeyInput').value=state.apiKey||'';
-   $('#modeloSel').value=state.modelo||'gemini-2.0-flash';
+   $('#modeloSel').value=state.modelo||'gemini-2.5-flash-lite';
    notificar('📥 Respaldo restaurado','Datos cargados correctamente.','ok',6000);
   }catch(err){alert('El archivo no es un respaldo válido.');}
   e.target.value='';
@@ -1647,14 +1755,14 @@ const hoy=new Date();
 $('#fechaHoy').textContent='📆 '+hoy.toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 $('#nombreHoy').textContent='Solo las que aplican '+DIAS[hoy.getDay()].toLowerCase();
 $('#apiKeyInput').value=state.apiKey||'';
-$('#modeloSel').value=state.modelo||'gemini-2.0-flash';
+$('#modeloSel').value=state.modelo||'gemini-2.5-flash-lite';
 if(state.dark){document.body.classList.add('dark');$('#btnDark').textContent='☀️ Claro';}
 vincularCalendario('#fVigenciaBtn','#fVigenciaDate','#fVigencia');
 vincularCalendario('#kVigenciaBtn','#kVigenciaDate','#kVigencia');
 vincularCalendario('#aVigenciaBtn','#aVigenciaDate','#aVigencia');
 renderEmojiPicker();
 rebuildMapas();renderTodo();
-setTimeout(()=>notificar('¡Hola Ricardo!','Clubes con apps + aviso rojo de vigencia vencida listos.','ok',5000),400);
+setTimeout(()=>notificar('¡Hola Ricardo!','Pulsa 🔬 Detectar modelo y luego 🤖 Actualizar.','info',6000),400);
 if(avisoMigracion){setTimeout(()=>notificar('📦 Datos recuperados','Migración automática desde versión anterior.','ok',7000),1200);}
 </script>
 </body>
